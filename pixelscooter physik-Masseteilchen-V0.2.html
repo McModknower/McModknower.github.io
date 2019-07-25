@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Game</title>
+<script lang=JavaScript>
+ function abs(x){
+   if(x<0)
+	return x*-1;
+   else
+    return x;
+ }
+ 
+ function Particle(x,y,color,size,mass){
+	this.dx = 0;
+	this.dy = 0;
+	this.ndx = this.dx;
+	this.ndy = this.dy;
+	this.x = x;
+	this.y = y;
+	this.size = size;
+	this.color = color;
+	this.mass = mass;
+	this.move = function(){
+		this.dx = this.ndx*0.99;
+		this.dy = this.ndy*0.99;
+		this.x = this.x + this.dx;
+		if(this.x-this.size*1.5<0){
+			this.x=this.size*1.5;
+			this.dx = -this.dx;
+		}
+		if(this.x+this.size*1.5>canvas.width){
+			this.x = canvas.width-this.size*1.5;
+			this.dx = -this.dx;
+		}
+		this.y = this.y + this.dy;
+		if(this.y-this.size*1.5<0){
+			this.y=this.size*1.5;
+			this.dy = -this.dy;
+		}
+		if(this.y+this.size*1.5>canvas.height){
+			this.y = canvas.height-this.size*1.5;
+			this.dy = -this.dy;
+		}
+		this.ndx = this.dx;
+		this.ndy = this.dy;
+	}
+	
+	this.tick = function(){
+		context.fillStyle = this.color;
+		context.fillRect(this.x-(this.size),this.y-(this.size),this.size*2,this.size*2);
+		d = this.size*2;
+		for(var p of particles){
+			if(p!=this){
+				//TODO Kollisionen Einbauen
+				dxx=p.x-this.x;
+				dd=0;
+				if(abs(dxx)>1)
+					dd=Math.pow(dxx,2);
+				dyy=p.y-this.y;
+				if(abs(dyy)>1)
+					dd+=Math.pow(dyy,2);
+				if(dd==0)
+					continue;
+				dd = 1/dd*p.mass/this.mass;
+				this.ndx = this.ndx + sign(dxx)*(dd);
+				this.ndy = this.ndy + sign(dyy)*(dd);
+			}
+		}
+	}
+	
+ }
+ 
+ function sign(x){
+	if(x>0)
+		return 1;
+	if(x===0)
+		return 0;
+	return -1;
+ }
+ 
+ particles = [];
+ 
+ _hex = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F']
+  function tohex(n){
+	r = "";
+	while(n>0){
+		r=_hex[n%16]+r;
+		n=Math.floor(n/16);
+	}
+	while(r.length<6){
+		r='0'+r;
+	}
+	return r;
+  }
+ 
+ function tick(){
+ 
+	context = document.getElementById('canvas').getContext('2d');
+	context.fillStyle = '#000000';
+	context.fillRect(0,0,canvas.width,canvas.height);
+	for(var p of particles){
+		p.move();
+	}
+	for(var p of particles){
+		p.tick();
+	}
+ 
+ }
+ 
+ 
+ color=0xFF8800
+ function klick(evt){
+	color+=838853;
+	if(color>0xFFFFFF)
+		color-=0x1000000;
+		//TODO Startgeschwindigkeit einbauen
+	particles.push(new Particle(evt.layerX,evt.layerY,"#"+tohex(color),Number.parseInt(window.prompt("Size?")),Number.parseInt(window.prompt("Mass?"))));
+ }
+ 
+</script>
+</head>
+<body id="Seite">
+<canvas id="canvas" width=100 height=100>
+</canvas>
+<script lang=JavaScript>
+  var elem = document.getElementById('Seite');
+  canvas = document.getElementById('canvas');
+	elem.addEventListener("mousedown",klick);
+  canvas.width = window.innerWidth-20;
+  canvas.height = window.innerHeight-20;
+  intervalnum = window.setInterval(tick,50);
+</script>
+</body>
+</html>

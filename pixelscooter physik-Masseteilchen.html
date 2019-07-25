@@ -1,0 +1,229 @@
+<html>
+<head>
+<title>Game</title>
+<script lang=JavaScript>
+ function abs(x){
+   if(x<0)
+	return x*-1;
+   else
+    return x;
+ }
+ 
+ function Car(kup,kright,kdown,kleft,color1,color2,mass){
+	this.kup = kup;
+	this.kright = kright;
+	this.kdown = kdown;
+	this.kleft = kleft;
+	this.up = false;
+	this.right = false;
+	this.down = false;
+	this.left = false;
+	this.dx = 0;
+	this.dy = 0;
+	this.ndx = this.dx;
+	this.ndy = this.dy;
+	this.x = canvas.width/2;
+	this.y = canvas.height/2;
+	this.size = 5;
+	this.color1 = color1;
+	this.color2 = color2;
+	this.mass = mass;
+	this.sf=1-1/abs(mass);
+	this.move = function(n){
+		this.dx = this.ndx*this.sf;
+		this.dy = this.ndy*this.sf;
+		if(this.up)
+		 this.dy = this.dy-0.1;
+		if(this.down)
+		 this.dy = this.dy+0.1;
+		if(this.right)
+		 this.dx = this.dx+0.1;
+		if(this.left)
+		 this.dx = this.dx-0.1;
+		this.x = this.x + this.dx;
+		if(this.x-this.size*1.5<0){
+			this.x=this.size*1.5;
+			this.dx = -this.dx;
+		}
+		if(this.x+this.size*1.5>canvas.width){
+			this.x = canvas.width-this.size*1.5;
+			this.dx = -this.dx;
+		}
+		this.y = this.y + this.dy;
+		if(this.y-this.size*1.5<0){
+			this.y=this.size*1.5;
+			this.dy = -this.dy;
+		}
+		if(this.y+this.size*1.5>canvas.height){
+			this.y = canvas.height-this.size*1.5;
+			this.dy = -this.dy;
+		}
+		this.ndx = this.dx;
+		this.ndy = this.dy;
+	}
+	
+	this.tick = function(){
+		context.fillStyle = this.color1;
+		context.fillRect(this.x-(this.size*1.5),this.y-(this.size*1.5),this.size*3,this.size*3);
+		context.fillStyle = this.color2;
+		this.mx = this.x-Math.floor(this.size/2);
+		this.my = this.y-Math.floor(this.size/2);
+		if(abs(this.dx)*3>abs(this.dy)){
+		 if(this.dx*this.dx<0.1){
+		 }else if(this.dx<0){
+		  this.mx = this.x-(this.size*1.5);
+		 }else {
+		  this.mx = this.x+(this.size*0.5);
+		}}
+		if(abs(this.dx)<3*abs(this.dy)){
+		 if(this.dy*this.dy<0.1){
+		 }else if(this.dy<0){
+		  this.my = this.y-(this.size*1.5);
+		 }else {
+		  this.my = this.y+(this.size*0.5);
+		}}
+		context.fillRect(this.mx,this.my,this.size,this.size);
+		
+		d = this.size*3;
+		help = 0;
+		for(var i in Cars){
+			if(Cars[i]!=this){
+				car = Cars[i];
+				/*if((abs(car.x-this.x)<d)&&(abs(car.y-this.y)<d)){
+					this.ndx = this.ndx + (this.x-car.x)*(abs(car.dx)+0.1)*0.05/this.mass*car.mass;
+					this.ndy = this.ndy + (this.y-car.y)*(abs(car.dy)+0.1)*0.05/this.mass*car.mass;
+				}else*/{
+					dxx=car.x-this.x;
+					dd=0;
+					if(abs(dxx)>5)
+						dd=Math.pow(dxx,2);
+					dyy=car.y-this.y;
+					if(abs(dyy)>5)
+						dd+=Math.pow(dyy,2);
+					if(dd==0)
+						continue;
+					dd = 1/dd*car.mass/this.mass;
+					this.ndx = this.ndx + sign(dxx)*(dd);
+					this.ndy = this.ndy + sign(dyy)*(dd);
+					if(this.ndx.toString()==="NaN"){
+						window.clearInterval(intervalnum);
+						console.log(this);
+						breakup();
+					}
+					if(this.ndy.toString()==="NaN"){
+						window.clearInterval(intervalnum);
+						console.log(this);
+						breakup();
+					}
+				}
+			}
+		}
+	}
+	
+ }
+ 
+ function sign(x){
+	if(x>0)
+		return 1;
+	if(x===0)
+		return 0;
+	return -1;
+ }
+ 
+ Cars = [];
+ 
+ function tick(){
+ 
+	context = document.getElementById('canvas').getContext('2d');
+	context.fillStyle = '#000000';
+	context.fillRect(0,0,canvas.width,canvas.height);
+	for(var i in Cars){
+		Cars[i].move(i);
+	}
+	for(var i in Cars){
+		Cars[i].tick();
+	}
+ 
+ }
+ 
+ 
+ function TasteGedrueckt(evt){
+	var key = evt.key;
+	for(var i in Cars){
+		if(key==Cars[i].kup)
+		 Cars[i].up = true;
+		if(key==Cars[i].kright)
+		 Cars[i].right = true;
+		if(key==Cars[i].kdown)
+		 Cars[i].down = true;
+		if(key==Cars[i].kleft)
+		 Cars[i].left = true;
+	}
+ }
+ function TasteLosgelassen(evt){
+    var key = evt.key;
+	for(var i in Cars){
+		if(key==Cars[i].kup)
+		 Cars[i].up = false;
+		if(key==Cars[i].kright)
+		 Cars[i].right = false;
+		if(key==Cars[i].kdown)
+		 Cars[i].down = false;
+		if(key==Cars[i].kleft)
+		 Cars[i].left = false;
+	}
+ }
+</script>
+</head>
+<body id="Seite">
+<canvas id="canvas" width=100 height=100>
+</canvas>
+<script lang=JavaScript>
+  var elem = document.getElementById('Seite');
+  elem.addEventListener("keydown", TasteGedrueckt );
+  elem.addEventListener("keyup", TasteLosgelassen);
+  canvas = document.getElementById('canvas');
+  canvas.width = window.innerWidth-20;
+  canvas.height = window.innerHeight-20;
+  car1 = new Car("ArrowUp","ArrowRight","ArrowDown","ArrowLeft","#FF8800","#FFFF00",1000);
+  car2 = new Car("w","d","s","a","#0088FF","#00FFFF",-99);
+  Cars = [car1,car2];
+  c1 = 0x000000;
+  c2 = 0x888888;
+  x = 50;
+  y = 50;
+  hex = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F']
+  function tohex(n){
+	r = "";
+	while(n>0){
+		r=hex[n%16]+r;
+		n=Math.floor(n/16);
+	}
+	while(r.length<6){
+		r='0'+r;
+	}
+	return r;
+  }
+  for(i=0;i<20;i++){
+	car = new Car("","","","","#"+tohex(c1),"#"+tohex(c2),99);
+	car.x+=x;
+	car.y+=y;
+	x+=29;
+	if(x>50)
+		x-=100;
+	y+=31;
+	if(y>50)
+		y-=100;
+	Cars.push(car);
+	c1+=838853;
+	if(c1>0xFFFFFF)
+		c1-=0x1000000;
+	c2+=838853;
+	if(c2>0xFFFFFF)
+		c2-=0x1000000;
+  }
+  intervalnum = window.setInterval(tick,50);
+  alert("Steuerung: Pfeiltasten/WASD\nDu prallst an Waenden ab.");
+</script>
+</body>
+</html>
