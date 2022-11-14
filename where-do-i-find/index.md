@@ -20,5 +20,14 @@
 - [PaperMc Documentation](https://papermc.io/)
 - [PaperMC Discord](https://discord.gg/papermc)
 
+#### GeyserMC (Bedrock Players on Java Servers)
+- [GeyserMC Discord](https://discord.gg/geysermc)
+
 #### Modded Minecraft
 - [Modded Minecraft Discord](https://discord.gg/moddedmc/)
+
+#### Minecraft Launchers
+- [MultiMC Discord](https://discord.gg/multimc)
+- [Prism Launcher Discord](https://discord.gg/prismlauncher)
+- [AtLauncher Help Page](https://atlauncher.com/help)
+- [FTB Support Page](https://feed-the-beast.com/support)
