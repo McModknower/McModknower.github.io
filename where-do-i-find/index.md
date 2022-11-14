@@ -2,6 +2,8 @@
 
 <b style="align-self: center; color: red;">Under Construction! Feel free to send change requests and more links to me.</b>
 
+This doesn't have to be limited to java / minecraft stuff.
+
 ## Where do i find Help with ...
 
 ### Programming Java
