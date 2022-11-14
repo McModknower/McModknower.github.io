@@ -13,6 +13,10 @@
 - [Minecraft Community Support Discord](https://discord.gg/58Sxm23)
 - [r/MinecraftHelp subreddit](https://www.reddit.com/r/MinecraftHelp/)
 
+#### Minecraft Protocol & API
+- [Community docs for Mojang API](https://mojang-api-docs.netlify.app/)
+- [Community Wiki for the Minecraft Protocol etc](https://wiki.vg/Main_Page)
+
 #### Minecraft Server
 - [r/Admincraft subreddit](https://www.reddit.com/r/admincraft/)
 
