@@ -10,8 +10,10 @@ This doesn't have to be limited to java / minecraft stuff.
 - [Together Java Discord](https://discord.gg/GzvQjhv)
 
 ### Minecraft
-- [Official Minecraft Support Site](https://help.minecraft.net/) - If you scroll to the bottom, you can click on "Contact" to send a message to the official support
+- [MinecraftHopper Help pages](https://minecrafthopper.net/)
 - [Minecraft Wiki](https://minecraft.fandom.com/wiki/Minecraft_Wiki)
+- [Official Minecraft Support Site](https://help.minecraft.net/) - If you scroll to the bottom, you can click on "Contact" to send a message to the official support
+- [Official Minecraft Discord](https://discordapp.com/invite/minecraft)
 - [Minecraft Community Support Discord](https://discord.gg/58Sxm23)
 - [r/MinecraftHelp subreddit](https://www.reddit.com/r/MinecraftHelp/)
 
@@ -23,7 +25,7 @@ This doesn't have to be limited to java / minecraft stuff.
 - [r/Admincraft subreddit](https://www.reddit.com/r/admincraft/)
 
 ##### Paper, Waterfall, and Velocity Servers
-- [PaperMc Documentation](https://papermc.io/)
+- [PaperMc Documentation](https://docs.papermc.io/)
 - [PaperMC Discord](https://discord.gg/papermc)
 
 #### GeyserMC (Bedrock Players on Java Servers)
@@ -31,6 +33,10 @@ This doesn't have to be limited to java / minecraft stuff.
 
 #### Modded Minecraft
 - [Modded Minecraft Discord](https://discord.gg/moddedmc/)
+
+##### Optifine Alternatives (because optifine is known for having a LOT of incompatibilities)
+- [lambdaurora.dev/optifine_alternatives/ (mostly fabric)](https://lambdaurora.dev/optifine_alternatives/)
+- [TheUsefulLists performance section](https://github.com/TheUsefulLists/UsefulMods/tree/main/Performance)
 
 #### Minecraft Launchers
 - [MultiMC Discord](https://discord.gg/multimc)
