@@ -33,7 +33,8 @@ This doesn't have to be limited to java / minecraft stuff.
 
 #### Modded Minecraft
 - [Modded Minecraft Discord](https://discord.gg/moddedmc/)
-- Optifine Alternatives (because optifine is known for having a LOT of incompatibilities): [TheUsefulLists performance section](https://github.com/TheUsefulLists/UsefulMods/tree/main/Performance)
+- Optifine Alternatives (because optifine is known for having a LOT of incompatibilities): [TheUsefulLists performance section](https://github.com/TheUsefulLists/UsefulMods/tree/main/Performance)  
+  and [This blog entry (including an explanation)](https://github.com/Matyrobbrt/minecraftforge-blog/blob/optifine-yay/content/personal/matyrobbrt/optifine-alternatives.md)
 
 #### Minecraft Launchers
 - [MultiMC Discord](https://discord.gg/multimc)
