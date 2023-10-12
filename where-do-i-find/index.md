@@ -7,7 +7,7 @@ This doesn't have to be limited to java / minecraft stuff.
 ## Where do i find Help with ...
 
 ### Programming Java
-- [Together Java Discord](https://discord.gg/GzvQjhv)
+- [Together Java](https://togetherjava.org/) (or go [directly to the discord](https://discord.gg/GzvQjhv))
 
 ### Minecraft
 - [MinecraftHopper Help pages](https://minecrafthopper.net/)
