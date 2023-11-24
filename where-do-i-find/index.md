@@ -11,7 +11,7 @@ This doesn't have to be limited to java / minecraft stuff.
 
 ### Minecraft
 - [MinecraftHopper Help pages](https://minecrafthopper.net/)
-- [Minecraft Wiki](https://minecraft.fandom.com/wiki/Minecraft_Wiki)
+- [Minecraft Wiki](https://minecraft.wiki/)
 - [Official Minecraft Support Site](https://help.minecraft.net/) - If you scroll to the bottom, you can click on "Contact" to send a message to the official support
 - [Official Minecraft Discord](https://discordapp.com/invite/minecraft)
 - [Minecraft Community Support Discord](https://discord.gg/58Sxm23)
@@ -25,7 +25,7 @@ This doesn't have to be limited to java / minecraft stuff.
 - [r/Admincraft subreddit](https://www.reddit.com/r/admincraft/)
 
 ##### Paper, Waterfall, and Velocity Servers
-- [PaperMc Documentation](https://docs.papermc.io/)
+- [PaperMC Documentation](https://docs.papermc.io/)
 - [PaperMC Discord](https://discord.gg/papermc)
 
 #### GeyserMC (Bedrock Players on Java Servers)
