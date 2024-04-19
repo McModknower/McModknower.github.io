@@ -1,0 +1,16 @@
+cabal-version: 1.12
+
+name:           wrong-way-haskell
+version:        0.1.0.0
+description:    A simple package to test some stuff
+build-type:     Simple
+
+executable poly-timings
+  main-is: Poly.hs
+  hs-source-dirs:
+      .
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -fprof-auto -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , QuickCheck
+  default-language: Haskell2010
