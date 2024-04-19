@@ -1,0 +1,140 @@
+#+title: A wrong way to use Haskell
+#+author: McModknower
+
+In this blog post I want to show and explain an interesting line of
+code I found in the assignments of a student in my haskell tutorium.
+
+* Introduction
+While I am studying computer science at a university, I am also giving
+one of multiple tutoriums for haskell. My work there includes grading
+the assignments the students have to do. Since it is the first time
+these students have to work with a language that is not java-like in
+syntax and since they only have one or two weeks for these
+assignments, there are some interesting pieces of code in there.
+
+* The assignment
+One of the assingments was about polynomials. Polynomials are
+mathematical functions of the form \( f(x) = a_nx^n + a_{n-1}x^{n-1} +
+\dots + a_1x^1 + a_0\). You could represent this as a list of factors
+(just the \(a_k\)s), but for educational purposes a custom recursive
+datatype was chosen:
+
+#+BEGIN_SRC haskell
+data Polynom = DegreeN Float Polynom | Degree0 Float deriving Show
+#+END_SRC
+
+This datatype is named ~Polynom~ and has two constructors. A polynom
+is either of a degree higher than 0 in the constructor ~DegreeN~ with
+its \(a_n\) and the rest of the polynom, or the end with degree 0
+~Degree0~ with \(a_0\).
+
+As an example, the polynom \(f(x) = 6x^2 + 5x + 4\) would be
+represented as ~DegreeN 6.0 (DegreeN 5.0 (Degree0 4.0))~.
+
+The ~deriving Show~ part at the end means that the haskell will
+generate the code for using the ~show~ function to convert a value
+into a string. The resulting string looks like the representation used
+in the example above.
+
+One task was to write a function ~degreeOf~ that computes the degree
+of a polynomial. The degree of a ~Degree0~ polynomial is trivially 0,
+while each ~DegreeN~ before adds 1 to the degree.
+
+One student wrote the following function, which computes the correct
+value. However I think that it is a wrong way to use haskell. If you
+know a bit haskell, you might want to figure how it works on you own.
+
+#+BEGIN_SRC haskell
+degreeOf :: Polynom -> Int
+degreeOf polynom = length (filter (=='N') (show polynom))
+#+END_SRC
+
+* How it works
+To describe how this implementation works, I will use the example from
+above, ~DegreeN 6.0 (DegreeN 5.0 (Degree0 4))~.
+
+The function has three parts: ~length~, ~filter (=='N')~, and ~show
+polynom~. These are computed from the inside to the outside.
+
+First, the polynom is converted to a string using ~show~. In this
+example this results in ~"DegreeN 6.0 (DegreeN 5.0 (Degree0 4.0))"~.
+
+Next, ~filter (=='N')~ filters this string to only keep the characters
+for which ~(=='N')~ is true. This means only the two capital Ns of the
+two ~DegreeN~ constructors are kept, resulting in ~"NN"~.
+
+Finally ~length~ computes the length of this list, which is two.
+
+In total, it counts the number of capital Ns in the representation,
+which is equal to the number of ~DegreeN~ constructors, since the only
+way a capital N is put into the representation is by that constructor.
+
+* Why this is bad style
+One problem is, that in case this was production code and someone
+later renamed the constructors, this code will most likely break.
+
+Another problem is that it results in the code taking more time to
+compute since the value has to be converted into a string, and the
+string has to be filtered. This is not really a problem, as computers
+are relatively fast, but it can be optimized to use way less checks.
+
+* What the intended solution was
+We tutors planned for a solution that uses pattern matching and
+recursion like this:
+
+#+BEGIN_SRC haskell
+degreeOf :: Polynom -> Int
+degreeOf (Degree0 _)      = 0
+degreeOf (DegreeN _ rest) = 1 + degreeOf rest
+#+END_SRC
+
+This solution does not use an intermediary string, but operates
+directly on the constructors. If the current value uses the ~Degree0~
+constructor, the degree is trivially zero. If it is the ~DegreeN~
+constructor, it is one more than the degree of the rest.
+
+Again using the example from above, first the whole value matches the
+second case, as ~DegreeN~ is the outermost constructor. In the next
+step ~DegreeN 5.0 (...)~ matches the second case again. Finally
+~Degree0 4.0~ matches the first case. Now as the stack unwinds, the
+result is 1 + 1 + 0, which is 2.
+
+* Runtime comparison
+To know for sure how big the runtime impact is, I ran both with some
+functions for 10000 randomly generated values with profiling. The
+source code for this is in the [[file:profiling][profiling]]
+directory. I used ~stack --profile run poly-timings -- +RTS -p -RTS~
+for running it.
+
+The interesting lines in the profiling result are these:
+
+#+BEGIN_SRC
+                                   individual      inherited
+COST CENTRE       MODULE  SRC                     no.   entries  %time %alloc   %time %alloc
+run               Main    Poly.hs:18:1-63         2290    10000    0.1    0.0    35.1   43.7
+ degreeOfTutor    Main    Poly.hs:(14,1)-(15,55)  2388   251908    0.1    0.2     0.1    0.2
+[lines from === ]
+ degreeOfStudent  Main    Poly.hs:11:1-64         2389    10000    7.2    2.9    34.8   43.4
+  show            Main    Poly.hs:8:63-66         2391        0    0.0    0.0    27.6   40.5
+   showsPrec      Main    Poly.hs:8:63-66         2392   251908   27.6   40.5    27.6   40.5
+#+END_SRC
+
+There you can see that the ~showsPrec~ function alone, which is
+internally used by ~show~, takes up 27.6% of the time this executeable
+ran. The ~degreeOfStudent~ function itself took 7.2% for a total of
+34.8%.
+The ~degreeOfTutor~ function however took only 0.1% of the time. This
+is at least 100 times less time for the same polynoms.
+
+* What can we learn from this
+As the profiling showed: sometimes the implementation with less code
+is way more expensive at runtime.
+Also in general operating on the native datatypes is often way more
+efficient than working with strings.
+
+However in this case, the runtime difference was not that important,
+as the profiling still ran in less than 4 seconds. During grading of
+the assingment I also didn't notice the time the test took.
+If this was production code and I saw it, I would change the
+implementation. If the impact on the program as a whole is
+negligeble however, it might stay there since it just works.
