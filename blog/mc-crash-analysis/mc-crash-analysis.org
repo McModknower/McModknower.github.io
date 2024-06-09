@@ -1,0 +1,79 @@
+#+title: How to analyse (modded) minecraft crashes
+#+author: McModknower
+
+This blog article shows how to analyse modded minecraft crashes by walking through a few different examples.
+It is intended to be used by anyone interested in this topic, mostly for beginners who search for a place to start.
+If anything is missing, wrong, or not understandable, please open an issue at TODO or ask in the modded minecraft discord in the thread for this blog.
+TODO: link that discord
+
+* What files can exists?
+
+For analysing crashes, log files are the most useful tool.
+There are mainly 4 differen types of files that are useful.
+1. crash reports (=crash-date-time.txt=)
+2. jvm crash reports (=hs_err_pid...=)
+3. game logs (=latest.log=)
+4. launcher logs (=launcher_log=)
+
+** crash reports
+If you have any kind of minecraft crash, first check if there is a crash report.
+In the vanilla launcher you sometimes get a button to open the crash report.
+
+Otherwise you can follow the guide at https://minecrafthopper.net/help/guides/getting-minecraft-crash-report/.
+Make sure the date and time match, so you don't accidentally get an old log.
+
+For modded launchers, check the game directory (also called instance directory, or a .minecraft folder in the instance directory) for a =crash-reports= folder.
+TODO: link the imgur gallery from ??log on the modded mc discord
+
+Of one exists, a crash report is normally the most helpful of the four files, since it contains most relevant information, but not exessively much more.
+
+TODO: Add example start of a crash report forr easier identification
+
+** jvm crash reports
+Sometimes an error happens outside of java code.
+In those cases a jvm crash report is generated.
+This often happens when the graphics driver has a bug.
+
+These =hs_err_pid...= files are not inside the crash-reports folder, but directly in the game directory.
+Similar to above, there is a guide for the vanilla launcher at https://minecrafthopper.net/help/guides/getting-minecraft-jvm-crash-report/.
+
+Since multiple if these can exist if you don't delete old ones,
+and since they are not named by date,
+always check the timestamp of the file.
+
+If one of from your crash time exists, it is very likely that it contains the most important information of that crash.
+
+TODO: add example start for reference
+
+** game logs
+Sometimes crash reports don't contain all relevant information,
+or there is no crash report. Then you need the game log, mostly just called log.
+
+The lastest log is in your game directory in the =logs= directory and called =latest.log=.
+As above there is a guide: https://minecrafthopper.net/help/guides/getting-minecraft-latest-log/.
+
+The log contains a lot of information that starts at the startup of your game.
+Nearly all irregularities and a lot more information is logged into it, so it is a very powerful tool.
+
+TODO: add example start
+
+Some launchers, like Prism and MultiMC have a game output inside the launcher that includes the log, but adds some more information before it.
+
+They start similar to this:
+TODO add example
+
+** launcher log
+Sometimes the other files don't contain the problem, or the launcher itself has a problem.
+In these cases you need a launcher log.
+
+It is not in the game directory, but in the launcher directory.
+For the vanilla launcher, see the guide at https://minecrafthopper.net/help/guides/getting-minecraft-launcher-log/
+
+For other launchers, check in the directory it is installed in.
+There might be multiple launcher logs, so make sure to use the correct one,
+which is the one without any number at the end.
+If you system hides file extensionns, which is the standard on windows,
+you might need to check the file type to see if there is a number.
+
+These logs contain a LOT of information, so check for the other types first.
+But since these contain the most information, sometimes they are the only way to find a problem.
