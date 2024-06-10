@@ -77,3 +77,138 @@ you might need to check the file type to see if there is a number.
 
 These logs contain a LOT of information, so check for the other types first.
 But since these contain the most information, sometimes they are the only way to find a problem.
+
+* Analysing a log file
+
+If you have a log file from a crash, the error is either near the bottom, near the top, or not in the file.
+
+My go-to workflow is:
+
+1. go to the bottom of the log
+2. check for the first `caused by` or `...Exception: ` line
+3. read that and depending on what it says continue to an appropriate rection
+   you can read through the table of contents for some possible messages that are known to appear there.
+
+** Attempted to load class ... for invalid dist DEDICATED_SERVER
+This means some mod tries to load stuff that is only available on the client.
+That means you have to go down from there to the first mod in the stacktrace,
+which in the following stacktrace is createcasing.
+
+In this case there is also another stacktrace above that with the same contents, but that has the mod and version directly after =at TRANSFORMER/=.
+
+#+BEGIN_SRC
+[10Jun2024 19:52:30.054] [Server thread/ERROR] [net.minecraftforge.fml.loading.RuntimeDistCleaner/DISTXFORM]: Attempted to load class net/minecraft/client/Minecraft for invalid dist DEDICATED_SERVER
+[10Jun2024 19:52:30.097] [Server thread/ERROR] [net.minecraftforge.eventbus.EventBus/EVENTBUS]: Exception caught during firing event: Attempted to load class net/minecraft/client/Minecraft for invalid dist DEDICATED_SERVER
+	Index: 13
+	Listeners:
+		0: HIGH
+		1: ASM: class dev.architectury.event.forge.EventHandlerImplCommon eventWorldEvent(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		2: NORMAL
+		3: ASM: class com.endertech.minecraft.forge.world.GameWorld$WorldData onLevelLoad(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		4: ASM: class ironfurnaces.Config onWorldLoad(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		5: net.minecraftforge.eventbus.EventBus$$Lambda$1658/0x0000021381795800@67fb4ca2
+		6: ASM: class com.endertech.minecraft.mods.adlods.world.WorldEvents onLevelLoaded(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		7: ASM: class me.duquee.createutilities.events.CommonEvents onLoad(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		8: net.minecraftforge.eventbus.EventBus$$Lambda$1658/0x0000021381795800@748d586
+		9: net.minecraftforge.eventbus.EventBus$$Lambda$1658/0x0000021381795800@1f26924e
+		10: net.minecraftforge.eventbus.EventBus$$Lambda$1658/0x0000021381795800@50af1b1c
+		11: ASM: com.flansmod.common.FlansMod@49b7b188 OnLevelLoad(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		12: ASM: class net.mcreator.respawn_animals.procedures.LoadedConfigProcedure onWorldLoad(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		13: ASM: net.mehvahdjukaar.randomium.forge.RandomiumForge@2ea076dd onWorldLoad(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		14: ASM: class net.mehvahdjukaar.moonlight.forge.MoonlightForge onLevelLoaded(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		15: ASM: class com.simibubi.create.foundation.events.CommonEvents onLoadWorld(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		16: ASM: class com.mrh0.createaddition.event.GameEvents loadEvent(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		17: ASM: mekanism.common.CommonWorldTickHandler@342a4fa2 worldLoadEvent(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+		18: ASM: team.creative.creativecore.common.config.event.ConfigEventHandler@4dadb841 loadLevel(Lnet/minecraftforge/event/level/LevelEvent$Load;)V
+java.lang.RuntimeException: Attempted to load class net/minecraft/client/Minecraft for invalid dist DEDICATED_SERVER
+	at MC-BOOTSTRAP/fmlloader@1.20.1-47.3.0/net.minecraftforge.fml.loading.RuntimeDistCleaner.processClassWithFlags(RuntimeDistCleaner.java:57)
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@10.0.9/cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:88)
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@10.0.9/cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:120)
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@10.0.9/cpw.mods.modlauncher.TransformingClassLoader.maybeTransformClassBytes(TransformingClassLoader.java:50)
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:113)
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219)
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229)
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219)
+	at cpw.mods.securejarhandler/cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	at TRANSFORMER/createcasing@1.20.1-1.6.0-fix1/fr.iglee42.createcasing.registries.ModCreativeModeTabs$RegistrateDisplayItemsGenerator.m_257865_(ModCreativeModeTabs.java:124)
+	at TRANSFORMER/forge@47.3.0/net.minecraftforge.common.ForgeHooks.onCreativeModeTabBuildContents(ForgeHooks.java:1627)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.world.item.CreativeModeTab.m_269498_(CreativeModeTab.java:129)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.world.item.CreativeModeTabs.m_268957_(CreativeModeTabs.java:1696)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.world.item.CreativeModeTabs.m_269421_(CreativeModeTabs.java:1695)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.world.item.CreativeModeTabs.m_269226_(CreativeModeTabs.java:1710)
+	at TRANSFORMER/randomium@1.20-1.31/net.mehvahdjukaar.randomium.Randomium.populateLoot(Randomium.java:117)
+	at TRANSFORMER/randomium@1.20-1.31/net.mehvahdjukaar.randomium.forge.RandomiumForge.onWorldLoad(RandomiumForge.java:39)
+	at TRANSFORMER/randomium@1.20-1.31/net.mehvahdjukaar.randomium.forge.__RandomiumForge_onWorldLoad_Load.invoke(.dynamic)
+	at MC-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:73)
+	at MC-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:315)
+	at MC-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:296)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.server.MinecraftServer.m_129815_(MinecraftServer.java:343)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.server.MinecraftServer.m_130006_(MinecraftServer.java:308)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.server.dedicated.DedicatedServer.m_7038_(DedicatedServer.java:164)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.server.MinecraftServer.m_130011_(MinecraftServer.java:634)
+	at TRANSFORMER/minecraft@1.20.1/net.minecraft.server.MinecraftServer.m_206580_(MinecraftServer.java:251)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+[10Jun2024 19:52:30.099] [Server thread/ERROR] [net.minecraft.server.MinecraftServer/]: Encountered an unexpected exception
+java.lang.RuntimeException: Attempted to load class net/minecraft/client/Minecraft for invalid dist DEDICATED_SERVER
+	at net.minecraftforge.fml.loading.RuntimeDistCleaner.processClassWithFlags(RuntimeDistCleaner.java:57) ~[fmlloader-1.20.1-47.3.0.jar%2369!/:1.0]
+	at cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:88) ~[modlauncher-10.0.9.jar%2355!/:?]
+	at cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:120) ~[modlauncher-10.0.9.jar%2355!/:?]
+	at cpw.mods.modlauncher.TransformingClassLoader.maybeTransformClassBytes(TransformingClassLoader.java:50) ~[modlauncher-10.0.9.jar%2355!/:?]
+	at cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:113) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135) ~[securejarhandler-2.1.10.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at fr.iglee42.createcasing.registries.ModCreativeModeTabs$RegistrateDisplayItemsGenerator.m_257865_(ModCreativeModeTabs.java:124) ~[CreateCasing-1.20.1-1.6.0-fix1.jar%23536!/:1.20.1-1.6.0-fix1]
+	at net.minecraftforge.common.ForgeHooks.onCreativeModeTabBuildContents(ForgeHooks.java:1627) ~[forge-1.20.1-47.3.0-universal.jar%23794!/:?]
+	at net.minecraft.world.item.CreativeModeTab.m_269498_(CreativeModeTab.java:129) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.minecraft.world.item.CreativeModeTabs.m_268957_(CreativeModeTabs.java:1696) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183) ~[?:?]
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[?:?]
+	at java.util.Iterator.forEachRemaining(Iterator.java:133) ~[?:?]
+	at java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845) ~[?:?]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) ~[?:?]
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) ~[?:?]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?]
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[?:?]
+	at net.minecraft.world.item.CreativeModeTabs.m_269421_(CreativeModeTabs.java:1695) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.minecraft.world.item.CreativeModeTabs.m_269226_(CreativeModeTabs.java:1710) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.mehvahdjukaar.randomium.Randomium.populateLoot(Randomium.java:117) ~[randomium-1.20-1.31.jar%23711!/:?]
+	at net.mehvahdjukaar.randomium.forge.RandomiumForge.onWorldLoad(RandomiumForge.java:39) ~[randomium-1.20-1.31.jar%23711!/:?]
+	at net.mehvahdjukaar.randomium.forge.__RandomiumForge_onWorldLoad_Load.invoke(.dynamic) ~[randomium-1.20-1.31.jar%23711!/:?]
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:73) ~[eventbus-6.0.5.jar%2352!/:?]
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:315) ~[eventbus-6.0.5.jar%2352!/:?]
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:296) ~[eventbus-6.0.5.jar%2352!/:?]
+	at net.minecraft.server.MinecraftServer.m_129815_(MinecraftServer.java:343) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.minecraft.server.MinecraftServer.m_130006_(MinecraftServer.java:308) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.minecraft.server.dedicated.DedicatedServer.m_7038_(DedicatedServer.java:164) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.minecraft.server.MinecraftServer.m_130011_(MinecraftServer.java:634) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at net.minecraft.server.MinecraftServer.m_206580_(MinecraftServer.java:251) ~[server-1.20.1-20230612.114412-srg.jar%23789!/:?]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+[10Jun2024 19:52:31.557] [Server thread/WARN] [oshi.util.platform.windows.WmiQueryHandler/]: COM exception: Invalid Query: SELECT PERCENTUSAGE FROM Win32_PerfRawData_PerfOS_PagingFile
+[10Jun2024 19:52:31.574] [Server thread/FATAL] [net.minecraftforge.common.ForgeMod/]: Preparing crash report with UUID 91c7b92b-5c1e-4762-8628-31538d02a511
+[10Jun2024 19:52:31.575] [Server thread/ERROR] [net.minecraft.server.MinecraftServer/]: This crash report has been saved to: X:\mcserver\.\crash-reports\crash-2024-06-10_19.52.31-server.txt
+[10Jun2024 19:52:31.576] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[10Jun2024 19:52:31.577] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[10Jun2024 19:52:31.578] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[10Jun2024 19:52:31.579] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[10Jun2024 19:52:32.067] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[10Jun2024 19:52:32.067] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[10Jun2024 19:52:32.090] [Server thread/INFO] [FTB Chunks/]: Shutting down map thread
+[10Jun2024 19:52:32.111] [Server thread/INFO] [Framework/]: Unloading server configs...
+#+END_SRC
