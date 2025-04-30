@@ -45,7 +45,9 @@ This one is a generic error and means you need to look further down for lines st
 ### `java.lang.Exception: Mod Loading has failed`
 This one is a generic error and means you have to go below the `A detailed walkthrough of the error, its code path and all known details is as follows:` line to find the real cause. Like above, check for lines starting with `Suppressed` or `Caused by`.
 
-### 
+### `java.lang.IllegalStateException: Failed to load registries due to above errors`
+This means some registry errors occured. Those are only visible in the latest log, so check it.
+I personally search for `>>` in the log, but make sure to find the correct entry. I don't have an example currently, so i will add an example how it looks later.
 
 ## Incompatibilities
 
@@ -75,6 +77,9 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 
 - `Caused by 0: java.lang.NoClassDefFoundError: Could not initialize class com.simibubi.create.AllBlocks`
   known mods that can cause this: railways (aka Create: Steam 'n' Rails)
+
+- `Caused by: java.lang.NoClassDefFoundError: com/simibubi/create/api/registry/CreateRegistries`
+  known mods that can cause this issue: adastra
 
 
 ### mixin errors
