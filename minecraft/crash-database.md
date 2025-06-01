@@ -99,3 +99,13 @@ If there is no mod in the first line with one of these errors, check the `Caused
 
 ### `java.lang.OutOfMemoryError: Java heap space`
 That means you need to allocate more ram (-Xmx) to your modpack, or you have to reduce the load by using less shaders, resource packs, mods, etc.
+
+## Uncategorized
+
+### `java.lang.NullPointerException: Registry Object not present:`
+This can be caused by a mod that is installed on your client but not on your server. If that is the case, you can simply remove the mod from your client to fix the problem.
+
+The mod in question is the one named directly after the colon in that line, for example in the following line it is hardcore_torches.
+```
+java.lang.NullPointerException: Registry Object not present: hardcore_torches:lit_torch
+```
