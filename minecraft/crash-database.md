@@ -43,7 +43,7 @@ JVM crash reports (`hs_err_pid<number>.log`) are very different and will be list
 This one is a generic error and means you need to look further down for lines starting with `Suppressed` or `Caused by` to find the real error
 
 ### `java.lang.Exception: Mod Loading has failed`
-This one is a generic error and means you have to go below the `A detailed walkthrough of the error, its code path and all known details is as follows:` line to find the real cause. Like above, check for lines starting with `Suppressed` or `Caused by`.
+This one is a generic error and means you have to go below the `A detailed walkthrough of the error, its code path and all known details is as follows:` line to find the real cause. Like above, check for lines starting with `Suppressed` or `Caused by`. Additionally, lines containing `Failure message:` or `Exception message:` can mark interesting points.
 
 ### `java.lang.IllegalStateException: Failed to load registries due to above errors`
 This means some registry errors occured. Those are only visible in the latest log, so check it.
@@ -81,6 +81,14 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 - `Caused by: java.lang.NoClassDefFoundError: com/simibubi/create/api/registry/CreateRegistries`
   known mods that can cause this issue: adastra
 
+### `java.lang.UnsupportedClassVersionError`
+This one means you have a .jar which was made for a newer java version than the one you have.
+It is caused by having a mod for a newer minecraft version, using the wrong java version ([MultiMC Wiki Page on using the right Java](https://github.com/MultiMC/Launcher/wiki/Using-the-right-Java)), or having a mod author provide a faulty mod.
+
+Most likely it will be the first case, like in the following example where someone had a newer version of cloth config:
+```
+		java.lang.UnsupportedClassVersionError: me/shedaniel/clothconfig/ClothConfigForge has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+```
 
 ### mixin errors
 `org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
