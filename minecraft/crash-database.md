@@ -117,3 +117,6 @@ The mod in question is the one named directly after the colon in that line, for 
 ```
 java.lang.NullPointerException: Registry Object not present: hardcore_torches:lit_torch
 ```
+
+### `com.google.gson.JsonSyntaxException: Expected a com.google.gson.JsonArray but was com.google.gson.JsonObject; at path $`
+Some json file is broken. If this happens on a server, check if your `banned-ips.json` and `banned-players.json` contain `{}`. If yes, simply delete the file(s) containing just `{}`.
