@@ -20,13 +20,17 @@ In a `latest.log`, the excpetion is normally close to the bottom of the log, as 
 
 ![](latest-log-where-is-the-error.png)
 
-However it can also happen that the latest log contains lines like the following:
+But there are other cases in which the actual error is further up:
+- It contains a `Missing or unsupported mandatory dependencies` line: see below in the section with that name.
+- It contains `Cowardly refusing to send event`: continue here.
+
+This line looks like the following:
 ```
 [04Apr2025 22:53:51.730] [Render thread/ERROR] [net.neoforged.fml.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent to a broken mod state
 ```
 If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editors/log viewers search feature to go to the first one, then go up to the closest exception.
 
-Sometimes the latest log does not contain the error, then you have to get one of the other files listed here.
+Sometimes the latest log does not contain the error, then you have to get one of the other files listed here, most likely the crash report.
 
 ### `launcher_log.txt`
 Launcherlogs have the error message normally near the last line that contains `MinecraftJavaLoggingContext`, as shown in the following image.
@@ -88,6 +92,13 @@ It is caused by having a mod for a newer minecraft version, using the wrong java
 Most likely it will be the first case, like in the following example where someone had a newer version of cloth config:
 ```
 		java.lang.UnsupportedClassVersionError: me/shedaniel/clothconfig/ClothConfigForge has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+```
+
+### `Missing or unsupported mandatory dependencies:`
+This message (if it exists) is followed by a list of mods and what dependencies are not met, for example in the following case the installed presencefootsteps version was made for a newer forge version:
+```
+[13:02:59] [main/ERROR]: Missing or unsupported mandatory dependencies:
+	Mod ID: 'forge', Requested by: 'presencefootsteps', Expected range: '[47.2.19,)', Actual version: '47.2.0'
 ```
 
 ### mixin errors
