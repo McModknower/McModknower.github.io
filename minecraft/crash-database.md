@@ -53,6 +53,9 @@ This one is a generic error and means you have to go below the `A detailed walkt
 This means some registry errors occured. Those are only visible in the latest log, so check it.
 I personally search for `>>` in the log, but make sure to find the correct entry. I don't have an example currently, so i will add an example how it looks later.
 
+### `java.lang.RuntimeException: One of more entry values did not copy to the correct id. Check log for details!`
+Search your log for the first instance of `Exception caught during firing event`.
+
 ## Incompatibilities
 
 ### `java.lang.NoClassDefFoundError` and `java.lang.ClassNotFoundException`
@@ -85,6 +88,15 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 - `Caused by: java.lang.NoClassDefFoundError: com/simibubi/create/api/registry/CreateRegistries`
   known mods that can cause this issue: adastra
 
+### `java.lang.NoSuchMethodError`
+This is similar to the errors about classes above, but i only know of it in cases where mod A was made for a different version of mod B.
+
+For example in the following exception, ironsspellbooks was made for a different tetra version:
+```
+java.lang.NoSuchMethodError: 'void se.mickelus.tetra.gui.stats.getter.StatGetterAttribute.<init>(net.minecraft.world.entity.ai.attributes.Attribute, boolean, boolean, double)'
+    at io.redspace.ironsspellbooks.compat.tetra.StatGetterPercentAttribute.<init>:L10
+```
+
 ### `java.lang.UnsupportedClassVersionError`
 This one means you have a .jar which was made for a newer java version than the one you have.
 It is caused by having a mod for a newer minecraft version, using the wrong java version ([MultiMC Wiki Page on using the right Java](https://github.com/MultiMC/Launcher/wiki/Using-the-right-Java)), or having a mod author provide a faulty mod.
@@ -100,6 +112,10 @@ This message (if it exists) is followed by a list of mods and what dependencies 
 [13:02:59] [main/ERROR]: Missing or unsupported mandatory dependencies:
 	Mod ID: 'forge', Requested by: 'presencefootsteps', Expected range: '[47.2.19,)', Actual version: '47.2.0'
 ```
+
+### `java.lang.NullPointerException: Cannot invoke "net.fabricmc.fabric.api.renderer.v1.Renderer.meshBuilder()" because the return value of "net.fabricmc.fabric.api.renderer.v1.RendererAccess.getRenderer()" is null`
+You have sodium but not indium, and some other mod (like continuity) needs indium to work if sodium is installed.  
+Fix it by installing indium.
 
 ### mixin errors
 `org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
