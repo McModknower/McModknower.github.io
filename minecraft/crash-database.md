@@ -172,3 +172,11 @@ Some json file is broken. If this happens on a server, check if your `banned-ips
 
 This `\u0131` character is a lowercase dotless I. It happens when your system is set to a locale where that character is the lowercase variant of the normal uppercase I and some mod tries to automatically generate IDs from text that contains an uppercase I.
 Report it to the mod author so they can fix it by using `.toLowerCase(Locale.Root)` in their code, and fix it for yourself by setting the locale java uses to english with `-Duser.language=en` added to your java arguments (MultiMC and Prism do this automatically iirc).
+
+### `java.lang.RuntimeException: Invalid id 4096 - maximum id range exceeded.`
+
+> This is caused by adding too many mods which add blocks. The solution is to add the Roughly Enough ID’s mod, which extents the limits for blocks, items, and biomes.
+> Download the mod from Curseforge: https://www.curseforge.com/minecraft/mc-mods/reid
+> If you use the latest release of REID, you will also need it’s dependency: https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap
+
+Copied from a bot macro on the Modded Minecraft Discord.
