@@ -101,6 +101,9 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 
 - `Caused by: java.lang.NoClassDefFoundError: com/simibubi/create/api/registry/CreateRegistries`
   known mods that can cause this issue: adastra
+  
+- `Caused by: org.spongepowered.asm.mixin.throwables.ClassMetadataNotFoundException: com.jozufozu.flywheel.backend.gl.GlStateTracker`
+  known mods that can cause this issue: oculus flywheel compat
 
 #### `Error loading class: net/caffeinemc/mods/sodium/api/memory/MemoryIntrinsics (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.api.memory.MemoryIntrinsics)`
 
