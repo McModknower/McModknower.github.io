@@ -68,7 +68,9 @@ I personally search for `>>` in the log, but make sure to find the correct entry
 ### `java.lang.RuntimeException: One of more entry values did not copy to the correct id. Check log for details!`
 Search your log for the first instance of `Exception caught during firing event`.
 
-## Incompatibilities
+## Incompatibilities & Missing dependencies
+
+(These to have similar symptoms, so i bundled them together)
 
 ### `java.lang.NoClassDefFoundError` and `java.lang.ClassNotFoundException`
 
@@ -99,6 +101,11 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 
 - `Caused by: java.lang.NoClassDefFoundError: com/simibubi/create/api/registry/CreateRegistries`
   known mods that can cause this issue: adastra
+
+#### `Error loading class: net/caffeinemc/mods/sodium/api/memory/MemoryIntrinsics (java.lang.ClassNotFoundException: net.caffeinemc.mods.sodium.api.memory.MemoryIntrinsics)`
+
+This is a nice example where one mod is missing its dependency, but it is not as nicely formatted as below under `Missing or unsupported mandatory dependencies:`.
+In the log this is from, Embeddium (which is a forge port of Sodium) was missing, and Oculus (which is a forge port of Iris) requires it to work.
 
 ### `java.lang.NoSuchMethodError`
 This is similar to the errors about classes above, but i only know of it in cases where mod A was made for a different version of mod B.
