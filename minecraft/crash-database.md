@@ -141,6 +141,10 @@ They normally indicate incompatibilities between different mods, but can also me
 Skim through the rest of the line(s) for mod names, those are the ones involved. Try disabling them. If it works, check for up/downgrades, like above for the `NoClassDefFoundError`.
 If there is no mod in the first line with one of these errors, check the `Caused by` lines below it for mod names.
 
+#### `Caused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure: Callback method pehkui$canUse$distance(FLnet/minecraft/world/entity/player/Player;)F in pehkui.mixins.json:compat1204minus.HorseScreenHandlerMixin from mod pehkui failed injection check, (0/1) succeeded. Scanned 1 target(s). Using refmap Pehkui-refmap.json`
+
+Can you spot the four times that pehkui is mentioned in there? That is the mod that is causing this error.  
+See https://github.com/Virtuoel/Pehkui/issues/591#issuecomment-2987838440 for more info.
 
 ## RAM problems
 
