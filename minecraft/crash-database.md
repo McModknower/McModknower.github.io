@@ -3,7 +3,11 @@ Modded Minecraft Crash Database
 
 This file will contain a bunch of error messages from modded minecraft crashes, with the intent that you can use your browsers search function to quickly search for your problem.
 
-Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc). If you need more help than this guide can provide, i can only recommend asking over there.
+Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc).
+If you need more help than this guide can provide, i can only recommend asking over there.
+
+IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You might loose all progress in your world otherwise. And like a friend of mine told me:
+> No backup, no mercy.
 
 ## Useful links
 Firstly, here are some links for more info or help:
@@ -142,6 +146,14 @@ If there is no mod in the first line with one of these errors, check the `Caused
 
 ### `java.lang.OutOfMemoryError: Java heap space`
 That means you need to allocate more ram (-Xmx) to your modpack, or you have to reduce the load by using less shaders, resource packs, mods, etc.
+
+## connection problems
+### `\u0000` and similar when trying to connect to a server/lan world
+
+![](mismatching-mods-after-update.png)
+
+This is normally caused by having different versions of some mods on client and server.
+Either get a fresh copy of a working pack from a friend, update the mods on the side where you didn't update them, or copy the mods from the server to the client.
 
 ## Uncategorized
 
