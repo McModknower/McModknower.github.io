@@ -184,3 +184,7 @@ Report it to the mod author so they can fix it by using `.toLowerCase(Locale.Roo
 > If you use the latest release of REID, you will also need it’s dependency: https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap
 
 Copied from a bot macro on the Modded Minecraft Discord.
+
+### `Exception in thread "main" cpw.mods.niofs.union.UnionFileSystem$UncheckedIOException: java.io.IOException: Data error (cyclic redundancy check)`
+
+Some zip error. My assumption is corrupted jar file somehwere, try redownloading all mods.
