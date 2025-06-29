@@ -5,6 +5,14 @@ This file will contain a bunch of error messages from modded minecraft crashes, 
 
 Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc). If you need more help than this guide can provide, i can only recommend asking over there.
 
+## Useful links
+Firstly, here are some links for more info or help:
+
+- [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic trubleshooting like having the wrong java version)
+- [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (I still have to read through them, I will add a description later)
+- [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [r/feedthebeast](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
+- [My own link collection](../where-do-i-find) (a lot of discords, and some other stuff)
+
 ## What to search for
 
 To search for an error, you need to know what part of the crash report you should search for.
