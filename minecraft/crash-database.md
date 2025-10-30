@@ -144,6 +144,7 @@ Fix it by installing indium.
 `Caused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure:`
 `Caused by: java.lang.RuntimeException: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
 `Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
+`org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException:`
 
 
 These errors are from the mixin system, which is made to allow changing code from other mods or minecraft itself.
@@ -155,6 +156,14 @@ If there is no mod in the first line with one of these errors, check the `Caused
 
 Can you spot the four times that pehkui is mentioned in there? That is the mod that is causing this error.  
 See https://github.com/Virtuoel/Pehkui/issues/591#issuecomment-2987838440 for more info.
+
+#### `org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @At`
+
+Sometimes two mods try to change the same thing with mixins, and the game crashes since there is no automatic way to do what both mods wanna do.
+An example is the following line, where netherexp and icv both want to change something about bows.
+In cases like these, you remove one of the mods.
+
+> org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @At("INVOKE") on net/minecraft/world/item/BowItem::**netherexp**$modifyArrowVelocity with priority 1000 cannot inject into net/minecraft/world/item/BowItem::m\_5551\_(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)V **merged by net.igneo.icv**.mixin.BowItemMixin with priority 999999999 [PREINJECT Applicator Phase -> **mixins.netherexp**.json:item.BowItemMixin **from mod netherexp** -> Prepare Injections ->  -> wrapOperation$zbg000$**netherexp**$modifyArrowVelocity(Lnet/minecraft/world/entity/projectile/AbstractArrow;Lnet/minecraft/world/entity/Entity;FFFFFLcom/llamalad7/mixinextras/injector/wrapoperation/Operation;)V -> Prepare]
 
 ## RAM problems
 
