@@ -2,6 +2,7 @@ Modded Minecraft Crash Database
 ===============================
 
 This file will contain a bunch of error messages from modded minecraft crashes, with the intent that you can use your browsers search function to quickly search for your problem.
+(As such some headings have multiple exception messages directly below it, so your browsers search function can find them)
 
 Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc).
 If you need more help than this guide can provide, i can only recommend asking over there.
@@ -136,15 +137,17 @@ This message (if it exists) is followed by a list of mods and what dependencies 
 ```
 
 ### `java.lang.NullPointerException: Cannot invoke "net.fabricmc.fabric.api.renderer.v1.Renderer.meshBuilder()" because the return value of "net.fabricmc.fabric.api.renderer.v1.RendererAccess.getRenderer()" is null`
+`Caused by: java.lang.IllegalStateException: The Fabric Rendering API is not available. If you have Sodium, install Indium!`
+
 You have sodium but not indium, and some other mod (like continuity) needs indium to work if sodium is installed.  
 Fix it by installing indium.
 
 ### mixin errors
-`org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
-`Caused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure:`
-`Caused by: java.lang.RuntimeException: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
-`Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`
-`org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException:`
+`org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`  
+`Caused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure:`  
+`Caused by: java.lang.RuntimeException: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`  
+`Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`  
+`org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException:`  
 
 
 These errors are from the mixin system, which is made to allow changing code from other mods or minecraft itself.
