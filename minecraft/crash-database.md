@@ -13,6 +13,7 @@ IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You migh
 ## Useful links
 Firstly, here are some links for more info or help:
 
+- [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative Curseforge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
 - [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic trubleshooting like having the wrong java version)
 - [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (I still have to read through them, I will add a description later)
 - [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [r/feedthebeast](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
@@ -141,6 +142,16 @@ This message (if it exists) is followed by a list of mods and what dependencies 
 
 You have sodium but not indium, and some other mod (like continuity) needs indium to work if sodium is installed.  
 Fix it by installing indium.
+
+### `java.lang.module.ResolutionException`
+
+Sometimes happens because one mod contains code that another mod also contains, and a third mod uses that code, in a way that java doesn't like.
+In the following case, tac and some unnamed mod contain stuff that kubejs uses.
+Remove one of the sources to fix this problem.
+
+If you have an unnamend mod as in this case, you can search for what mod contains that using the crash assistant mod (link at the start of this page).
+
+`Exception in thread "main" java.lang.module.ResolutionException: Modules com.fasterxml.jackson.core and tac export package com.fasterxml.jackson.core.format to module kubejs`
 
 ### mixin errors
 `org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered`  
