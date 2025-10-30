@@ -52,6 +52,15 @@ Launcherlogs have the error message normally near the last line that contains `M
 ### `hs_err_pid<number>.log`
 JVM crash reports (`hs_err_pid<number>.log`) are very different and will be listed here sometime in the future, but are not the focus for now.
 
+### Other problems without relevant stuff in the logs
+
+#### black game, but working window decorations
+If you game looks like this, and you have both an integrated and dedicated graphics card,
+try setting minecraft to run under the dedicated graphics card.
+
+![A minecraft window with working decorations/window title, but black content](black-minecraft.png)
+
+
 ## The errors that are not actually the error
 
 `Exception in thread "main" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException`
