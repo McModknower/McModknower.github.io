@@ -70,6 +70,13 @@ I personally search for `>>` in the log, but make sure to find the correct entry
 ### `java.lang.RuntimeException: One of more entry values did not copy to the correct id. Check log for details!`
 Search your log for the first instance of `Exception caught during firing event`.
 
+### `java.lang.IllegalStateException: Cannot get config value before config is loaded.`
+
+Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event` lines.
+More about those messages is written above in the [latest.log](#codelatestlogcode) section.
+
+If there is no such line in the latest.log, this can also be the real problem (and as such the real stacktrace).
+
 ## Incompatibilities & Missing dependencies
 
 (These to have similar symptoms, so i bundled them together)
