@@ -258,3 +258,6 @@ Copied from a bot macro on the Modded Minecraft Discord.
 ### `Exception in thread "main" cpw.mods.niofs.union.UnionFileSystem$UncheckedIOException: java.io.IOException: Data error (cyclic redundancy check)`
 
 Some zip error. My assumption is corrupted jar file somehwere, try redownloading all mods.
+
+### `java.lang.IllegalArgumentException: Payload may not be larger than 1048576 bytes`
+You have too much stuff for normal minecraft to handle it. Add [Packet Fixer](https://modrinth.com/mod/packet-fixer) or a similar mod to fix this problem. Or remove mods until you are below the packet limit.
