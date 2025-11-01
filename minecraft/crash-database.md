@@ -129,13 +129,19 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 This is a nice example where one mod is missing its dependency, but it is not as nicely formatted as below under `Missing or unsupported mandatory dependencies:`.
 In the log this is from, Embeddium (which is a forge port of Sodium) was missing, and Oculus (which is a forge port of Iris) requires it to work.
 
-### `java.lang.NoSuchMethodError`
+### `java.lang.NoSuchMethodError` and `java.lang.IncompatibleClassChangeError`
 This is similar to the errors about classes above, but i only know of it in cases where mod A was made for a different version of mod B.
 
 For example in the following exception, ironsspellbooks was made for a different tetra version:
 ```
 java.lang.NoSuchMethodError: 'void se.mickelus.tetra.gui.stats.getter.StatGetterAttribute.<init>(net.minecraft.world.entity.ai.attributes.Attribute, boolean, boolean, double)'
     at io.redspace.ironsspellbooks.compat.tetra.StatGetterPercentAttribute.<init>:L10
+```
+
+And here another Example with the other exception type, where sculkhornid was made for a different anvianslib version:
+```
+java.lang.IncompatibleClassChangeError: Expected static method 'void net.anvian.anvianslib.config.TelemetryConfigManager.initialize(java.io.File)'
+    at net.anvian.sculkhornid.CommonMod.init:L13
 ```
 
 ### `java.lang.UnsupportedClassVersionError`
