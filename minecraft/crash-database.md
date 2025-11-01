@@ -144,6 +144,12 @@ java.lang.IncompatibleClassChangeError: Expected static method 'void net.anvian.
     at net.anvian.sculkhornid.CommonMod.init:L13
 ```
 
+And one example of the relatively rare case that a mod was made for a different version of the modloader (forge/neoforge/fabric/...), where the first line says something involving net.minecraft:
+```
+java.lang.NoSuchMethodError: 'net.minecraft.resources.ResourceLocation net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(java.lang.String, java.lang.String)'
+    at tallestred.numismaticoverhaul.cap.CurrencyHolderAttacher.<clinit>(CurrencyHolderAttacher.java:19) ~[numismaticoverhaul-1.20.1-2.0.1.jar#239!/:2.0.1] {re:mixin,re:classloading}
+```
+
 ### `java.lang.UnsupportedClassVersionError`
 This one means you have a .jar which was made for a newer java version than the one you have.
 It is caused by having a mod for a newer minecraft version, using the wrong java version ([MultiMC Wiki Page on using the right Java](https://github.com/MultiMC/Launcher/wiki/Using-the-right-Java)), or having a mod author provide a faulty mod.
