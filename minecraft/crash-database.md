@@ -15,7 +15,7 @@ Firstly, here are some links for more info or help:
 
 - [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative Curseforge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
 - [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic trubleshooting like having the wrong java version)
-- [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (I still have to read through them, I will add a description later)
+- [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (What mods to use, what mods/"launchers"/... to avoid)
 - [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [r/feedthebeast](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
 - [My own link collection](../where-do-i-find) (a lot of discords, and some other stuff)
 
@@ -73,8 +73,9 @@ This one is a generic error and means you need to look further down for lines st
 This one is a generic error and means you have to go below the `A detailed walkthrough of the error, its code path and all known details is as follows:` line to find the real cause. Like above, check for lines starting with `Suppressed` or `Caused by`. Additionally, lines containing `Failure message:` or `Exception message:` can mark interesting points.
 
 ### `java.lang.IllegalStateException: Failed to load registries due to above errors`
-This means some registry errors occured. Those are only visible in the latest log, so check it.
-I personally search for `>>` in the log, but make sure to find the correct entry. I don't have an example currently, so i will add an example how it looks later.
+This means some registry errors occured. Those are only visible in the latest.log, so check it.
+I personally search for `Registry loading errors:` in the latest.log, and from that read downwards through the lines that are not starting with `<tab>at `.
+For interpretation of those lines, see the section [Registry loading errors](#Registry-loading-errors).
 
 ### `java.lang.RuntimeException: One of more entry values did not copy to the correct id. Check log for details!`
 Search your log for the first instance of `Exception caught during firing event`.
@@ -207,6 +208,26 @@ That means you need to allocate more ram (-Xmx) to your modpack, or you have to 
 
 This is normally caused by having different versions of some mods on client and server.
 Either get a fresh copy of a working pack from a friend, update the mods on the side where you didn't update them, or copy the mods from the server to the client.
+
+## Registry loading errors
+After a line like `[08Oct2025 17:03:37.185] [Render thread/ERROR] [net.minecraft.resources.RegistryDataLoader/]: Registry loading errors:`, there are normally multiple errors that might be caused by each other or not.
+
+It starts with a line with one `>` at its start, for example `> Errors in registry minecraft:root:`
+Afterwards there will be entries consisting of one line starting with two `>>`, for example `>> Errors in element minecraft:worldgen/configured_feature:`, followed by a normal stacktrace.
+
+If you see a line containing `Unbound values in registry` as the exception of one of the stacktraces, those unbound values might be things that failed to load themselves, and are visible further down.
+For example the line `java.lang.IllegalStateException: Unbound values in registry ResourceKey[minecraft:root / minecraft:worldgen/configured_feature]: [ars_monde:grass_vegetation, ars_monde:moss_vegetation, ars_monde:purple_grass_vegetation]` means that three things in the category `minecraft:worldgen/configured_feature` are either missing or failed to load: `ars_monde:grass_vegetation`, `ars_monde:moss_vegetation`, and `ars_monde:purple_grass_vegetation`.
+As you can see from these names, the part before the colon `:` is normally the mod name, while the part behind it is some name for the thing itself.
+
+In my example case, there are three stacktraces below the first one, corresponding to the three values taht failed to load.
+Each one begins with `>> Errors in element ars_monde:grass_vegetation:` (and similar for the other names).
+These stacktraces each start with a line like `java.lang.IllegalStateException: Failed to parse ars_monde:worldgen/configured_feature/grass_vegetation.json from pack openloader/C:\Users\********\curseforge\minecraft\Instances\Main\datapacks\ars_monde.zip`, which in this case even names the datapack that caused the problem, followed by a bunch of `<tab>at ...` lines, followed by a line like `Caused by: java.lang.IllegalStateException: Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_rice; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_beetroots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_carrots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_tomatoes; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_cabbages; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:sandy_shrub; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_onions; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:red_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:brown_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_potatoes`
+
+This `Caused by:` line is describing what went wrong. The feature from ars_monde trues to use stuff from farmersdelight, which doesn't exist in this game.
+This can be caused by the mod being in a different version, or by some mod just not being installed as it was in this case.
+
+(That means this can actually be an instance of the very common [Incompatibilities & Missing dependencies](#incompatibilities-amp-missing-dependencies) problems.)
+
 
 ## Uncategorized
 
