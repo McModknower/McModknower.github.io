@@ -13,6 +13,7 @@ IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You migh
 ## Useful links
 Firstly, here are some links for more info or help:
 
+- [Modded Minecraft Usual Suspects](usual-suspects.md) (my own list on mods/datapacks to suspect first if anything acts up)
 - [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative Curseforge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
 - [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic trubleshooting like having the wrong java version)
 - [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (What mods to use, what mods/"launchers"/... to avoid)
