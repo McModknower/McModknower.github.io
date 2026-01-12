@@ -130,7 +130,7 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
 This is a nice example where one mod is missing its dependency, but it is not as nicely formatted as below under `Missing or unsupported mandatory dependencies:`.
 In the log this is from, Embeddium (which is a forge port of Sodium) was missing, and Oculus (which is a forge port of Iris) requires it to work.
 
-### `java.lang.NoSuchMethodError` and `java.lang.IncompatibleClassChangeError`
+### `java.lang.NoSuchMethodError`, `java.lang.NoSuchFieldError`, and `java.lang.IncompatibleClassChangeError`
 This is similar to the errors about classes above, but i only know of it in cases where mod A was made for a different version of mod B.
 
 For example in the following exception, ironsspellbooks was made for a different tetra version:
@@ -143,6 +143,12 @@ And here another Example with the other exception type, where sculkhornid was ma
 ```
 java.lang.IncompatibleClassChangeError: Expected static method 'void net.anvian.anvianslib.config.TelemetryConfigManager.initialize(java.io.File)'
     at net.anvian.sculkhornid.CommonMod.init:L13
+```
+
+Because this happend multiple times recently (as of 2026-01-12), dynamictreesplus being made for a different dynamcitrees version:
+```
+java.lang.NoSuchFieldError: Class com.dtteam.dynamictrees.api.season.ClimateZoneType does not have member field 'com.dtteam.dynamictrees.api.season.ClimateZoneType ARID'
+    at com.dtteam.dynamictreesplus.tree.CactusSpecies.setPreReloadDefaults:L55
 ```
 
 And one example of the relatively rare case that a mod was made for a different version of the modloader (forge/neoforge/fabric/...), where the first line says something involving net.minecraft:
