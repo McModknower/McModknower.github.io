@@ -44,6 +44,7 @@ This line looks like the following:
 [04Apr2025 22:53:51.730] [Render thread/ERROR] [net.neoforged.fml.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent to a broken mod state
 ```
 If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editors/log viewers search feature to go to the first one, then go up to the closest exception.
+Often times the problem is in a stacktrace that is directly after line containing `Failed to create mod instance.` If a line containing that exists, the problem is very likely in that stacktrace.
 
 Sometimes the latest log does not contain the error, then you have to get one of the other files listed here, most likely the crash report.
 
@@ -81,9 +82,9 @@ For interpretation of those lines, see the section [Registry loading errors](#Re
 ### `java.lang.RuntimeException: One of more entry values did not copy to the correct id. Check log for details!`
 Search your log for the first instance of `Exception caught during firing event`.
 
-### `java.lang.IllegalStateException: Cannot get config value before config is loaded.`
+### `java.lang.IllegalStateException: Cannot get config value before config is loaded.` or `java.lang.IllegalStateException: Mod 'architectury' is not available!`
 
-Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event` lines.
+Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event` or `Failed to create mod instance` lines.
 More about those messages is written above in the [latest.log](#codelatestlogcode) section.
 
 If there is no such line in the latest.log, this can also be the real problem (and as such the real stacktrace).
@@ -102,6 +103,15 @@ This error normally means one of the following things:
   In this case, change the version(s) of these mods until it works. Normally updating both (or just A) works
 - you have a mixin error somewhere before in the latest log
   In this case go to that error (it will contain `mixin` somewhere) and search for that exception message.
+
+One example where its cause 2 is the following, where the ars_elemancy version is made for a different ars_elemental version.
+```
+[13Jan2026 13:13:15.835] [modloading-worker-0/ERROR] [net.neoforged.fml.javafmlmod.FMLModContainer/LOADING]: Failed to create mod instance. ModID: ars_elemancy, class lyrellion.ars_elemancy.ArsElemancy
+java.lang.NoClassDefFoundError: alexthw/ars_elemental/api/item/IElementalArmor
+...
+	at lyrellion.ars_elemancy.common.items.armor.ArmorSet.<init>:L22
+```
+
 
 #### Create 6
 Create 6 broke a bunch of compatibilities that mods had buildin. if you get any of the exceptions listed here, check what mod is listed directly below that error and update it to a version that supports create 6, or disable that mod.
