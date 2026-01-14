@@ -82,7 +82,7 @@ For interpretation of those lines, see the section [Registry loading errors](#Re
 ### `java.lang.RuntimeException: One of more entry values did not copy to the correct id. Check log for details!`
 Search your log for the first instance of `Exception caught during firing event`.
 
-### `java.lang.IllegalStateException: Cannot get config value before config is loaded.` or `java.lang.IllegalStateException: Mod 'architectury' is not available!`
+### `java.lang.IllegalStateException: Cannot get config value before config is loaded.` or `java.lang.IllegalStateException: Mod 'architectury' is not available!` or `java.util.NoSuchElementException: No value present`
 
 Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
 More about those messages is written above in the [latest.log](#codelatestlogcode) section.
