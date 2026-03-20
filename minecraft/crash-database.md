@@ -7,7 +7,7 @@ This file will contain a bunch of error messages from modded minecraft crashes, 
 Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc).
 If you need more help than this guide can provide, i can only recommend asking over there.
 
-IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You might loose all progress in your world otherwise. And like a friend of mine told me:
+IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You might lose all progress in your world otherwise. And like a friend of mine told me:
 > No backup, no mercy.
 
 ## Useful links
@@ -15,7 +15,7 @@ Firstly, here are some links for more info or help:
 
 - [Modded Minecraft Usual Suspects](usual-suspects.md) (my own list on mods/datapacks to suspect first if anything acts up)
 - [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative Curseforge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
-- [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic trubleshooting like having the wrong java version)
+- [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic troubleshooting like having the wrong java version)
 - [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (What mods to use, what mods/"launchers"/... to avoid)
 - [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [r/feedthebeast](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
 - [My own link collection](../where-do-i-find) (a lot of discords, and some other stuff)
