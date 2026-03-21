@@ -7,7 +7,7 @@ This file will contain a bunch of error messages from modded Minecraft crashes, 
 Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc).
 If you need more help than this guide can provide, i can only recommend asking over there.
 
-IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You might lose all progress in your world otherwise. And like a friend of mine told me:
+IMPORTANT: before changing stuff in a world you played on, **DO A BACKUP**. You might lose all progress in your world otherwise. And like a friend of mine told me:
 > No backup, no mercy.
 
 ## Useful links
@@ -43,10 +43,10 @@ This line looks like the following:
 ```
 [04Apr2025 22:53:51.730] [Render thread/ERROR] [net.neoforged.fml.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent to a broken mod state
 ```
-If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editors/log viewers search feature to go to the first one, then go up to the closest exception.
+If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editor's/log viewer's search feature to go to the first one, then go up to the closest exception.
 Often times the problem is in a stack trace that is directly after line containing `Failed to create mod instance` or `Failed to register automatic subscribers`. If a line containing that exists, the problem is very likely in that stack trace.
 
-Sometimes the latest log does not contain the error, then you have to get one of the other files listed here, most likely the crash report.
+If the latest log does not contain the error, you have to check one of the other files listed here, most likely the crash report.
 
 ### `launcher_log.txt`
 Launcher logs have the error message normally near the last line that contains `MinecraftJavaLoggingContext`, as shown in the following image.
@@ -57,7 +57,7 @@ JVM crash reports (`hs_err_pid<number>.log`) are very different and will be list
 ### Other problems without relevant stuff in the logs
 
 #### black game, but working window decorations
-If you game looks like this, and you have both an integrated and dedicated graphics card,
+If your game looks like this, and you have both an integrated and dedicated graphics card,
 try setting Minecraft to run under the dedicated graphics card.
 
 ![A Minecraft window with working decorations/window title, but black content](black-minecraft.png)
@@ -91,7 +91,7 @@ If there is no such line in the latest.log, this can also be the real problem (a
 
 ## Incompatibilities & Missing dependencies
 
-(These to have similar symptoms, so i bundled them together)
+(These two have similar symptoms, so I bundled them together)
 
 ### `java.lang.NoClassDefFoundError` and `java.lang.ClassNotFoundException`
 
@@ -99,7 +99,7 @@ This error normally means one of the following things:
 
 - You have a mod which needs some other mod (dependency) which is not installed.
   In this case, install the dependency or remove the mod.
-- You have a mod (A) which has compatibility with some other mod (B) build in, but A was made for a different version of B.
+- You have a mod (A) which has compatibility with some other mod (B) built-in, but A was made for a different version of B.
   In this case, change the version(s) of these mods until it works. Normally updating both (or just A) works
 - you have a mixin error somewhere before in the latest log
   In this case go to that error (it will contain `mixin` somewhere) and search for that exception message.
@@ -121,7 +121,7 @@ java.lang.NoClassDefFoundError: alexthw/ars_elemental/api/item/IElementalArmor
 
 
 #### Create 6
-Create 6 broke a bunch of compatibilities that mods had builtin. if you get any of the exceptions listed here, check what mod is listed directly below that error and update it to a version that supports create 6, or disable that mod.
+Create 6 broke a bunch of compatibilities that mods had built-in. if you get any of the exceptions listed here, check what mod is listed directly below that error and update it to a version that supports create 6, or disable that mod.
 
 For Example in the following case, ComputerCraft (aka `cc: tweaked`) is the mod that needs to be updated:
 ```
@@ -162,7 +162,7 @@ java.lang.IncompatibleClassChangeError: Expected static method 'void net.anvian.
     at net.anvian.sculkhornid.CommonMod.init:L13
 ```
 
-Because this happened multiple times recently (as of 2026-01-12), dynamictreesplus being made for a different dynamcitrees version:
+Because this happened multiple times recently (as of 2026-01-12), dynamictreesplus being made for a different dynamictrees version:
 ```
 java.lang.NoSuchFieldError: Class com.dtteam.dynamictrees.api.season.ClimateZoneType does not have member field 'com.dtteam.dynamictrees.api.season.ClimateZoneType ARID'
     at com.dtteam.dynamictreesplus.tree.CactusSpecies.setPreReloadDefaults:L55
@@ -246,7 +246,7 @@ This is normally caused by having different versions of some mods on client and 
 Either get a fresh copy of a working pack from a friend, update the mods on the side where you didn't update them, or copy the mods from the server to the client.
 
 ## Registry loading errors
-After a line like `[08Oct2025 17:03:37.185] [Render thread/ERROR] [net.minecraft.resources.RegistryDataLoader/]: Registry loading errors:`, there are normally multiple errors that might be caused by each other or not.
+After a line like `[08Oct2025 17:03:37.185] [Render thread/ERROR] [net.minecraft.resources.RegistryDataLoader/]: Registry loading errors:`, there are normally multiple errors, often related to each other.
 
 It starts with a line with one `>` at its start, for example `> Errors in registry minecraft:root:`
 Afterwards there will be entries consisting of one line starting with two `>>`, for example `>> Errors in element minecraft:worldgen/configured_feature:`, followed by a normal stack trace.
@@ -259,7 +259,7 @@ In my example case, there are three stack traces below the first one, correspond
 Each one begins with `>> Errors in element ars_monde:grass_vegetation:` (and similar for the other names).
 These stack traces each start with a line like `java.lang.IllegalStateException: Failed to parse ars_monde:worldgen/configured_feature/grass_vegetation.json from pack openloader/C:\Users\********\curseforge\minecraft\Instances\Main\datapacks\ars_monde.zip`, which in this case even names the data pack that caused the problem, followed by a bunch of `<tab>at ...` lines, followed by a line like `Caused by: java.lang.IllegalStateException: Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_rice; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_beetroots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_carrots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_tomatoes; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_cabbages; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:sandy_shrub; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_onions; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:red_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:brown_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_potatoes`
 
-This `Caused by:` line is describing what went wrong. The feature from ars_monde trues to use stuff from farmersdelight, which doesn't exist in this game.
+This `Caused by:` line is describing what went wrong. The feature from ars_monde tries to use stuff from farmersdelight, which doesn't exist in this game.
 This can be caused by the mod being in a different version, or by some mod just not being installed as it was in this case.
 
 (That means this can actually be an instance of the very common [Incompatibilities & Missing dependencies](#incompatibilities-amp-missing-dependencies) problems.)
@@ -285,7 +285,7 @@ Report it to the mod author so they can fix it by using `.toLowerCase(Locale.Roo
 
 ### `java.lang.RuntimeException: Invalid id 4096 - maximum id range exceeded.`
 
-> This is caused by adding too many mods which add blocks. The solution is to add the Roughly Enough ID’s mod, which extents the limits for blocks, items, and biomes.
+> This is caused by adding too many mods which add blocks. The solution is to add the Roughly Enough ID’s mod, which extends the limits for blocks, items, and biomes.
 > Download the mod from Curseforge: https://www.curseforge.com/minecraft/mc-mods/reid
 > If you use the latest release of REID, you will also need it’s dependency: https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap
 
