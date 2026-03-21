@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en-US">
+  <!--
+      TODOs:
+      - looking at timestamp to not use old files
+      - You got some file with a name like <code>hs_err_pid1234.TODO</code> and starting with <code>TODO</code>
+      - watchdog get exception name from example
+      - link to spark website
+      - TODO: copy binary search instructions from modded mc discord
+      - TODO: add screenshots of where on those sites the buttons/links are normally.
+      - sections: crash-report, hs_err_pid, crash-find-file, watchdog, outofmemory, spark
+      - dark mode
+    -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Modded Minecraft Self Help Guide</title>
+    <!-- This script makes clicking 3 times in a <code></code> tag mark not the entire paragraph but just that code tag. Stolen from https://adventofcode.com -->
+    <script>
+      window.addEventListener('click',
+			      function(e,s,r){
+				  if(e.target.nodeName==='CODE'&&e.detail===3){
+				      s=window.getSelection();
+				      s.removeAllRanges();
+				      r=document.createRange();
+				      r.selectNodeContents(e.target);
+				      s.addRange(r);
+				  }});
+    </script>
+    <style>
+      * {
+	  border-radius: 1em;
+      }
+
+      body > div {
+	  outline: solid rgb(from currentColor r g b / .2);
+	  padding: 0 .5ex;
+	  scroll-margin-block-start: 1em;
+      }
+
+      h1, h2, h3 {
+	  text-align:center;
+      }
+
+      h3 {
+	  margin: .5ex 0;
+      }
+
+      .options {
+	  display: flex;
+	  justify-content: center;
+	  flex-wrap: wrap;
+      }
+
+      .options > * {
+	  width: 20em;
+	  margin: .5ex;
+	  text-align: justify;
+	  outline: solid;
+	  padding: .5ex;
+      }
+      .options > a {
+	  position: relative;
+	  bottom: 0;
+	  transition: all .1s ease-in-out;
+	  text-decoration-line: none;
+      }
+      .options > a:hover {
+	  bottom: .5ex;
+	  background-color: SelectedItem;
+	  color: SelectedItemText;
+	  outline-color: SelectedItem;
+      }
+
+      :target {
+	  outline: dashed;
+      }
+
+      code {
+	  outline: solid 1pt black;
+	  border-radius: 0;
+	  background-color: #E0E0E0;
+	  color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Modded Minecraft Self Help Guide</h1>
+    <div id="start">
+      <h2>What kind of problem do you have?</h2>
+      <span class="options">
+	<a href="#crash">
+	  <h3>A Crash</h3>
+	  Without you killing mc, it closes by itself.
+	  Maybe your launcher shows some kind of error message.
+	  If you have the Crash Asisstant mod, its window opened.
+	</a>
+	<a href="#freeze">
+	  <h3>A Freeze</h3>
+	  Minecraft stopped responding.
+	  You can't move, and waiting for 5 minutes doesn't change anything.
+	  Maybe your OS shows you a dialog similar to "Minecraft stopped responding. Force close it?"
+	</a>
+	<a href="#lag">
+	  <h3>Lag</h3>
+	  Minecraft works, but you have low FPS/TPS, mobs move slowly/only a few times per second.
+	</a>
+	<a href="#mod-specific">
+	  <h3>Mod Feature</h3>
+	  Some mod feature is not working as you think it should.
+	  Maybe a machine is not receiving power, some mob is not attacking as it should.
+	</a>
+	<a href="#other">
+	  <h3>Other Stuff</h3>
+	  Something else not mentioned in another option.
+	</a>
+      </span>
+    </div>
+
+    <div id="crash">
+      <h2>What information do you have about the crash?</h2>
+      <span class="options">
+	<a href="#crash-report">
+	  <h3>Crash Report</h3>
+	  You got some file with a name like <code>crash-2026-02-30_12.34.56-client.txt</code> and/or starting with <code>---- Minecraft Crash Report ----</code> in the <code>crash-reports</code> directory.
+	</a>
+	<a href="#hs_err_pid">
+	  <h3>JVM crash report</h3>
+	  You got some file with a name like <code>hs_err_pid1234.log</code> and starting with <code># A fatal error has been detected by the Java Runtime Environment:</code> in the instance/game directory (aka <code>.minecraft</code>).
+	</a>
+	<a href="#crash-find-file">
+	  <h3>I don&apos;t know</h3>
+	  You have no idea what a crash report or jvm crash report is,
+	  and if you have one for the current crash.
+	</a>
+      </span>
+    </div>
+    <div id="freeze">
+      <h2>So you have a Freeze</h2>
+      <span class="options">
+	<a href="#watchdog">
+	  <h3>Watchdog crash/log</h3>
+	  You got something in a crash report or latest.log about the watchdog.
+	  TODO: get exception name from example
+	</a>
+	<a href="#outofmemory">
+	  <h3>java.lang.OutOfMemoryError</h3>
+	  Your latest.log contains something about <code>java.lang.OutOfMemoryError</code>
+	</a>
+	<a href="#thread-dump">
+	  <h3>Neither</h3>
+	  You have no useful information in the latest.log and no watchdog crash.
+	</a>
+      </span>
+    </div>
+    <div id="crash-report">
+      <h2>What to do with a Minecraft crash report</h2>
+      TODO
+    </div>
+    <div id="hs_err_pid">
+      <h2>What to do with a JVM crash report</h2>
+      TODO
+    </div>
+    <div id="crash-find-file">
+      <h2>How to find the relevant log/report files</h2>
+      TODO
+    </div>
+
+    
+    <div id="lag">
+      <h2>So you have a lag problem</h2>
+      <div>
+	<h3>laggy datapacks</h3>
+	First, remove known sources of lag:
+	Any datapack (or datapack packaged as mod) that checks entity nbt, for example to provide dynamic light.
+	Datapacks i know that do this: dynamiclight, enchantments_plus, origins_plus_plus, incendium.
+	(Note: lambdynlights is a client-side mod that provides dynamic lighting, and does not fall under this rule)
+      </div>
+      <div>
+	<h3>GPU heavy visual mods</h3>
+	Some visually heavy mods can cause FPS problems if used too much.
+	Any shader or lod mod falls under this, namely iris, distant horizons, voxy, and bobby.
+      </div>
+      <div>
+	<h3>Making a spark report</h3>
+	If you still experience lag after doing the steps above, its time to make a <a href="TODO">spark</a> report
+      </div>
+    </div>
+
+    <div id="watchdog">
+      <h2>What to do with a Watchdog crash</h2>
+      TODO
+    </div>
+    <div id="outofmemory">
+      <h2>What to do when you got an OutOfMemoryError</h2>
+      TODO
+    </div>
+    <div id="thread-dump">
+      <h2>Making and interpreting a thread dump</h2>
+      If your game froze, and you have no other leads, a thread dump is the most viable option to get more info.
+      It dumps what the code is currently doing, so if it is stuck on one specific thing, it will be listed inside here.
+      First create one using one of the methods described on <a href="https://www.baeldung.com/java-thread-dump">https://www.baeldung.com/java-thread-dump</a>.
+      Then look into the file and search for thre stack traces following <code>"Server thread"</code> and <code>"Render thread"</code>.
+      Maybe there is some mod mentioned there, but reading them is always adviseable.
+      If they contain something about <code>.getChunk</code>, this indicates they are currently getting/loading/generating a chunk.
+      In that case looking into the worker threads <code>"Worker-Main-</code> is also a good idea.
+    </div>
+
+    <div id="mod-specific">
+      <h2>Mod specific problems</h2>
+      If you have a problem with a feature/bug in one specific mod,
+      check the mods bug tracker and wiki, or ask on its discord,
+      if these things exist for that mod.
+      Normally mods have linked these on their mod download page on modrinth/curseforge.
+      TODO: add screenshots of where on those sites the buttons/links are normally.
+    </div>
+    <div id="other">
+      <h2>Other things</h2>
+      Since this website can't list every single problem and what to do,
+      here are some general modded mc problem solving tips:
+      <ul>
+	<li>
+	  <b>Make backups.</b>
+	  Make sure to have regular backups of everything you are playing on.
+	  And never test stuff on your precious survival world/in your main instance.
+	  Make a copy of the world/instance/pack instead and test in there to not break what you are actively playing on.
+	</li>
+	<li>
+	  <b>Do a binary search</b>
+	  Whenever something is caused by some mod and you have no better way of finding the causing mod,
+	  a binary search is a good old and trusty method.
+	  It works like this:
+	  TODO: copy binary search instructions from modded mc discord
+	</li>
+	<li>
+	  <b>Ask for help</b>
+	  Asking for help is always an option, and if you don't have concrete ideas, probably the best one.
+	  Depending on what you want help with, different places are good.
+	  A lot of modpacks/mods/... have discord servers, and sone have forums.
+	  Those are always good places too ask.
+	  If you have a question about a premade modpack with a discord, its best to ask there,
+	  as they might configured the mods in some way.
+	  If you have a question about one mod, and are not playing a premade modpack,
+	  looking for the mods discord (probably linked on their modrinth/curseforge page)
+	  and asking there is the best option.
+	  If its a general problem, asking on the neoforge, fabric, or modded mc discord is probably the best.
+	  See their respective websites or my <a href="../where-do-i-find">Where do i find?</a> page for links
+	</li>
+    </div>
+  </body>
+</html>
