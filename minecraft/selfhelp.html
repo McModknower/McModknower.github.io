@@ -28,22 +28,43 @@
 				  }});
     </script>
     <style>
+
+      :root {
+          --primary-color: #00aa00;
+          --secondary-color: #61371f;
+          --text-color: #555555;
+          --headings-color: black;
+	  --background-color-primary: white;
+	  --background-color-secondary: #eeeeee;
+      }
+
       * {
 	  border-radius: 1em;
       }
 
-      body > div {
-	  outline: solid rgb(from currentColor r g b / .2);
-	  padding: 0 .5ex;
+      body {
+	  /* margin: 0px; */
+          /* padding: 20px; */
+	  text-align: justify;
+	  font-family: Arial, Helvetica, sans-serif;
+	  color: var(--text-color);
+	  background-color: var(--background-color-primary);
+	  hyphens: auto;
+      }
+
+      section {
+	  outline: solid rgb(from var(--primary-color) r g b / .5);
+	  background-color: var(--background-color-secondary);
+	  padding: .5ex;
+	  margin-bottom: 2ex;
 	  scroll-margin-block-start: 1em;
       }
 
-      h1, h2, h3 {
+      h1, h2, h3, h4 {
+	  color: var(--headings-color);
 	  text-align:center;
-      }
-
-      h3 {
-	  margin: .5ex 0;
+	  margin-top: 0;
+	  margin-bottom: 0.5em;
       }
 
       .options {
@@ -56,20 +77,27 @@
 	  width: 20em;
 	  margin: .5ex;
 	  text-align: justify;
-	  outline: solid;
+	  border: solid var(--secondary-color);
+	  color: var(--text-color);
+	  background-color: var(--background-color-primary);
 	  padding: .5ex;
       }
       .options > a {
-	  position: relative;
-	  bottom: 0;
-	  transition: all .1s ease-in-out;
+	  /* position: relative; */
+	  /* bottom: 0; */
+	  transition: all .5s ease-in-out;
 	  text-decoration-line: none;
+	  & h3 {
+	      transition: all .5s ease-in-out;
+	  }
       }
       .options > a:hover {
-	  bottom: .5ex;
-	  background-color: SelectedItem;
-	  color: SelectedItemText;
-	  outline-color: SelectedItem;
+	  background-color: var(--secondary-color);
+	  color: white;
+          transform: scale(1.03);
+	  & h3 {
+	      color: white;
+	  }
       }
 
       :target {
@@ -81,12 +109,29 @@
 	  border-radius: 0;
 	  background-color: #E0E0E0;
 	  color: black;
+	  hyphens: none;
+      }
+
+      @media (prefers-color-scheme: dark) {
+
+	  :root {
+              --primary-color: #00aa00;
+              --secondary-color: #61371f;
+              --text-color: #cccccc;
+              --headings-color: white;
+	      --background-color-primary: #202020;
+	      --background-color-secondary: #191919;
+	  }
+
+	  a {
+	      color: #5e5eff;
+	  }
       }
     </style>
   </head>
   <body>
     <h1>Modded Minecraft Self Help Guide</h1>
-    <div id="start">
+    <section id="start">
       <h2>What kind of problem do you have?</h2>
       <span class="options">
 	<a href="#crash">
@@ -115,9 +160,9 @@
 	  Something else not mentioned in another option.
 	</a>
       </span>
-    </div>
+    </section>
 
-    <div id="crash">
+    <section id="crash">
       <h2>What information do you have about the crash?</h2>
       <span class="options">
 	<a href="#crash-report">
@@ -134,8 +179,8 @@
 	  and if you have one for the current crash.
 	</a>
       </span>
-    </div>
-    <div id="freeze">
+    </section>
+    <section id="freeze">
       <h2>So you have a Freeze</h2>
       <span class="options">
 	<a href="#watchdog">
@@ -152,22 +197,22 @@
 	  You have no useful information in the latest.log and no watchdog crash.
 	</a>
       </span>
-    </div>
-    <div id="crash-report">
+    </section>
+    <section id="crash-report">
       <h2>What to do with a Minecraft crash report</h2>
       TODO
-    </div>
-    <div id="hs_err_pid">
+    </section>
+    <section id="hs_err_pid">
       <h2>What to do with a JVM crash report</h2>
       TODO
-    </div>
-    <div id="crash-find-file">
+    </section>
+    <section id="crash-find-file">
       <h2>How to find the relevant log/report files</h2>
       TODO
-    </div>
+    </section>
 
     
-    <div id="lag">
+    <section id="lag">
       <h2>So you have a lag problem</h2>
       <div>
 	<h3>laggy datapacks</h3>
@@ -185,17 +230,17 @@
 	<h3>Making a spark report</h3>
 	If you still experience lag after doing the steps above, its time to make a <a href="TODO">spark</a> report
       </div>
-    </div>
+    </section>
 
-    <div id="watchdog">
+    <section id="watchdog">
       <h2>What to do with a Watchdog crash</h2>
       TODO
-    </div>
-    <div id="outofmemory">
+    </section>
+    <section id="outofmemory">
       <h2>What to do when you got an OutOfMemoryError</h2>
       TODO
-    </div>
-    <div id="thread-dump">
+    </section>
+    <section id="thread-dump">
       <h2>Making and interpreting a thread dump</h2>
       If your game froze, and you have no other leads, a thread dump is the most viable option to get more info.
       It dumps what the code is currently doing, so if it is stuck on one specific thing, it will be listed inside here.
@@ -204,17 +249,17 @@
       Maybe there is some mod mentioned there, but reading them is always adviseable.
       If they contain something about <code>.getChunk</code>, this indicates they are currently getting/loading/generating a chunk.
       In that case looking into the worker threads <code>"Worker-Main-</code> is also a good idea.
-    </div>
+    </section>
 
-    <div id="mod-specific">
+    <section id="mod-specific">
       <h2>Mod specific problems</h2>
       If you have a problem with a feature/bug in one specific mod,
       check the mods bug tracker and wiki, or ask on its discord,
       if these things exist for that mod.
       Normally mods have linked these on their mod download page on modrinth/curseforge.
       TODO: add screenshots of where on those sites the buttons/links are normally.
-    </div>
-    <div id="other">
+    </section>
+    <section id="other">
       <h2>Other things</h2>
       Since this website can't list every single problem and what to do,
       here are some general modded mc problem solving tips:
@@ -246,6 +291,7 @@
 	  If its a general problem, asking on the neoforge, fabric, or modded mc discord is probably the best.
 	  See their respective websites or my <a href="../where-do-i-find">Where do i find?</a> page for links
 	</li>
-    </div>
+      </ul>
+    </section>
   </body>
 </html>
