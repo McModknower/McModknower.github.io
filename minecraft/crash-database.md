@@ -1,7 +1,7 @@
 Modded Minecraft Crash Database
 ===============================
 
-This file will contain a bunch of error messages from modded minecraft crashes, with the intent that you can use your browsers search function to quickly search for your problem.
+This file will contain a bunch of error messages from modded Minecraft crashes, with the intent that you can use your browsers search function to quickly search for your problem.
 (As such some headings have multiple exception messages directly below it, so your browsers search function can find them)
 
 Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc).
@@ -13,11 +13,11 @@ IMPORTANT: before changing stuff in a world you played on, DO A BACKUP. You migh
 ## Useful links
 Firstly, here are some links for more info or help:
 
-- [Modded Minecraft Usual Suspects](usual-suspects.md) (my own list on mods/datapacks to suspect first if anything acts up)
-- [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative Curseforge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
-- [MultiMc FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic troubleshooting like having the wrong java version)
+- [Modded Minecraft Usual Suspects](usual-suspects.md) (my own list on mods/data packs to suspect first if anything acts up)
+- [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative CurseForge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
+- [MultiMC FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic troubleshooting like having the wrong java version)
 - [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (What mods to use, what mods/"launchers"/... to avoid)
-- [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [r/feedthebeast](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
+- [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [Modded Minecraft](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
 - [My own link collection](../where-do-i-find) (a lot of discords, and some other stuff)
 
 ## What to search for
@@ -31,7 +31,7 @@ In a crash report (for example a file like `crash-2025-03-29_13.24.00-client.txt
 ![](crash-report-where-is-the-error.png)
 
 ### `latest.log`
-In a `latest.log`, the excpetion is normally close to the bottom of the log, as seen in the following image, and contains `Exception` or `Error` like in a crash report.
+In a `latest.log`, the exception is normally close to the bottom of the log, as seen in the following image, and contains `Exception` or `Error` like in a crash report.
 
 ![](latest-log-where-is-the-error.png)
 
@@ -44,12 +44,12 @@ This line looks like the following:
 [04Apr2025 22:53:51.730] [Render thread/ERROR] [net.neoforged.fml.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent to a broken mod state
 ```
 If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editors/log viewers search feature to go to the first one, then go up to the closest exception.
-Often times the problem is in a stacktrace that is directly after line containing `Failed to create mod instance` or `Failed to register automatic subscribers`. If a line containing that exists, the problem is very likely in that stacktrace.
+Often times the problem is in a stack trace that is directly after line containing `Failed to create mod instance` or `Failed to register automatic subscribers`. If a line containing that exists, the problem is very likely in that stack trace.
 
 Sometimes the latest log does not contain the error, then you have to get one of the other files listed here, most likely the crash report.
 
 ### `launcher_log.txt`
-Launcherlogs have the error message normally near the last line that contains `MinecraftJavaLoggingContext`, as shown in the following image.
+Launcher logs have the error message normally near the last line that contains `MinecraftJavaLoggingContext`, as shown in the following image.
 
 ### `hs_err_pid<number>.log`
 JVM crash reports (`hs_err_pid<number>.log`) are very different and will be listed here sometime in the future, but are not the focus for now.
@@ -58,9 +58,9 @@ JVM crash reports (`hs_err_pid<number>.log`) are very different and will be list
 
 #### black game, but working window decorations
 If you game looks like this, and you have both an integrated and dedicated graphics card,
-try setting minecraft to run under the dedicated graphics card.
+try setting Minecraft to run under the dedicated graphics card.
 
-![A minecraft window with working decorations/window title, but black content](black-minecraft.png)
+![A Minecraft window with working decorations/window title, but black content](black-minecraft.png)
 
 
 ## The errors that are not actually the error
@@ -75,7 +75,7 @@ This one is a generic error and means you need to look further down for lines st
 This one is a generic error and means you have to go below the `A detailed walkthrough of the error, its code path and all known details is as follows:` line to find the real cause. Like above, check for lines starting with `Suppressed` or `Caused by`. Additionally, lines containing `Failure message:` or `Exception message:` can mark interesting points.
 
 ### `java.lang.IllegalStateException: Failed to load registries due to above errors`
-This means some registry errors occured. Those are only visible in the latest.log, so check it.
+This means some registry errors occurred. Those are only visible in the latest.log, so check it.
 I personally search for `Registry loading errors:` in the latest.log, and from that read downwards through the lines that are not starting with `<tab>at `.
 For interpretation of those lines, see the section [Registry loading errors](#Registry-loading-errors).
 
@@ -87,7 +87,7 @@ Search your log for the first instance of `Exception caught during firing event`
 Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
 More about those messages is written above in the [latest.log](#codelatestlogcode) section.
 
-If there is no such line in the latest.log, this can also be the real problem (and as such the real stacktrace).
+If there is no such line in the latest.log, this can also be the real problem (and as such the real stack trace).
 
 ## Incompatibilities & Missing dependencies
 
@@ -121,9 +121,9 @@ java.lang.NoClassDefFoundError: alexthw/ars_elemental/api/item/IElementalArmor
 
 
 #### Create 6
-Create 6 broke a bunch of compatibilities that mods had buildin. if you get any of the exceptions listed here, check what mod is listed directly below that error and update it to a version that supports create 6, or disable that mod.
+Create 6 broke a bunch of compatibilities that mods had builtin. if you get any of the exceptions listed here, check what mod is listed directly below that error and update it to a version that supports create 6, or disable that mod.
 
-For Example in the following case, computercraft (aka `cc: tweaked`) is the mod that needs to be updated:
+For Example in the following case, ComputerCraft (aka `cc: tweaked`) is the mod that needs to be updated:
 ```
  Suppressed: java.lang.NoClassDefFoundError: com/simibubi/create/content/contraptions/BlockMovementChecks$AttachedCheck
 	at dan200.computercraft.shared.integration.CreateIntegration.setup:L23
@@ -137,7 +137,7 @@ For Example in the following case, computercraft (aka `cc: tweaked`) is the mod 
   known mods that can cause this: railways (aka Create: Steam 'n' Rails)
 
 - `Caused by: java.lang.NoClassDefFoundError: com/simibubi/create/api/registry/CreateRegistries`
-  known mods that can cause this issue: adastra
+  known mods that can cause this issue: Ad Astra
   
 - `Caused by: org.spongepowered.asm.mixin.throwables.ClassMetadataNotFoundException: com.jozufozu.flywheel.backend.gl.GlStateTracker`
   known mods that can cause this issue: oculus flywheel compat
@@ -162,13 +162,13 @@ java.lang.IncompatibleClassChangeError: Expected static method 'void net.anvian.
     at net.anvian.sculkhornid.CommonMod.init:L13
 ```
 
-Because this happend multiple times recently (as of 2026-01-12), dynamictreesplus being made for a different dynamcitrees version:
+Because this happened multiple times recently (as of 2026-01-12), dynamictreesplus being made for a different dynamcitrees version:
 ```
 java.lang.NoSuchFieldError: Class com.dtteam.dynamictrees.api.season.ClimateZoneType does not have member field 'com.dtteam.dynamictrees.api.season.ClimateZoneType ARID'
     at com.dtteam.dynamictreesplus.tree.CactusSpecies.setPreReloadDefaults:L55
 ```
 
-And one example of the relatively rare case that a mod was made for a different version of the modloader (forge/neoforge/fabric/...), where the first line says something involving net.minecraft:
+And one example of the relatively rare case that a mod was made for a different version of the mod loader (forge/neoforge/fabric/...), where the first line says something involving net.minecraft:
 ```
 java.lang.NoSuchMethodError: 'net.minecraft.resources.ResourceLocation net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(java.lang.String, java.lang.String)'
     at tallestred.numismaticoverhaul.cap.CurrencyHolderAttacher.<clinit>(CurrencyHolderAttacher.java:19) ~[numismaticoverhaul-1.20.1-2.0.1.jar#239!/:2.0.1] {re:mixin,re:classloading}
@@ -202,7 +202,7 @@ Sometimes happens because one mod contains code that another mod also contains, 
 In the following case, tac and some unnamed mod contain stuff that kubejs uses.
 Remove one of the sources to fix this problem.
 
-If you have an unnamend mod as in this case, you can search for what mod contains that using the crash assistant mod (link at the start of this page).
+If you have an unnamed mod as in this case, you can search for what mod contains that using the crash assistant mod (link at the start of this page).
 
 `Exception in thread "main" java.lang.module.ResolutionException: Modules com.fasterxml.jackson.core and tac export package com.fasterxml.jackson.core.format to module kubejs`
 
@@ -238,7 +238,7 @@ In cases like these, you remove one of the mods.
 That means you need to allocate more ram (-Xmx) to your modpack, or you have to reduce the load by using less shaders, resource packs, mods, etc.
 
 ## connection problems
-### `\u0000` and similar when trying to connect to a server/lan world
+### `\u0000` and similar when trying to connect to a server/LAN world
 
 ![](mismatching-mods-after-update.png)
 
@@ -249,15 +249,15 @@ Either get a fresh copy of a working pack from a friend, update the mods on the 
 After a line like `[08Oct2025 17:03:37.185] [Render thread/ERROR] [net.minecraft.resources.RegistryDataLoader/]: Registry loading errors:`, there are normally multiple errors that might be caused by each other or not.
 
 It starts with a line with one `>` at its start, for example `> Errors in registry minecraft:root:`
-Afterwards there will be entries consisting of one line starting with two `>>`, for example `>> Errors in element minecraft:worldgen/configured_feature:`, followed by a normal stacktrace.
+Afterwards there will be entries consisting of one line starting with two `>>`, for example `>> Errors in element minecraft:worldgen/configured_feature:`, followed by a normal stack trace.
 
-If you see a line containing `Unbound values in registry` as the exception of one of the stacktraces, those unbound values might be things that failed to load themselves, and are visible further down.
+If you see a line containing `Unbound values in registry` as the exception of one of the stack traces, those unbound values might be things that failed to load themselves, and are visible further down.
 For example the line `java.lang.IllegalStateException: Unbound values in registry ResourceKey[minecraft:root / minecraft:worldgen/configured_feature]: [ars_monde:grass_vegetation, ars_monde:moss_vegetation, ars_monde:purple_grass_vegetation]` means that three things in the category `minecraft:worldgen/configured_feature` are either missing or failed to load: `ars_monde:grass_vegetation`, `ars_monde:moss_vegetation`, and `ars_monde:purple_grass_vegetation`.
 As you can see from these names, the part before the colon `:` is normally the mod name, while the part behind it is some name for the thing itself.
 
-In my example case, there are three stacktraces below the first one, corresponding to the three values taht failed to load.
+In my example case, there are three stack traces below the first one, corresponding to the three values that failed to load.
 Each one begins with `>> Errors in element ars_monde:grass_vegetation:` (and similar for the other names).
-These stacktraces each start with a line like `java.lang.IllegalStateException: Failed to parse ars_monde:worldgen/configured_feature/grass_vegetation.json from pack openloader/C:\Users\********\curseforge\minecraft\Instances\Main\datapacks\ars_monde.zip`, which in this case even names the datapack that caused the problem, followed by a bunch of `<tab>at ...` lines, followed by a line like `Caused by: java.lang.IllegalStateException: Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_rice; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_beetroots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_carrots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_tomatoes; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_cabbages; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:sandy_shrub; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_onions; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:red_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:brown_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_potatoes`
+These stack traces each start with a line like `java.lang.IllegalStateException: Failed to parse ars_monde:worldgen/configured_feature/grass_vegetation.json from pack openloader/C:\Users\********\curseforge\minecraft\Instances\Main\datapacks\ars_monde.zip`, which in this case even names the data pack that caused the problem, followed by a bunch of `<tab>at ...` lines, followed by a line like `Caused by: java.lang.IllegalStateException: Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_rice; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_beetroots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_carrots; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_tomatoes; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_cabbages; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:sandy_shrub; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_onions; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:red_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:brown_mushroom_colony; Unknown registry key in ResourceKey[minecraft:root / minecraft:block]: farmersdelight:wild_potatoes`
 
 This `Caused by:` line is describing what went wrong. The feature from ars_monde trues to use stuff from farmersdelight, which doesn't exist in this game.
 This can be caused by the mod being in a different version, or by some mod just not being installed as it was in this case.
@@ -281,7 +281,7 @@ Some json file is broken. If this happens on a server, check if your `banned-ips
 ### `Exception message: net.minecraft.ResourceLocationException: Non [a-z0-9/._-] character in path of location: dndecor:\u0131ndustrial_frontlight`
 
 This `\u0131` character is a lowercase dotless I. It happens when your system is set to a locale where that character is the lowercase variant of the normal uppercase I and some mod tries to automatically generate IDs from text that contains an uppercase I.
-Report it to the mod author so they can fix it by using `.toLowerCase(Locale.Root)` in their code, and fix it for yourself by setting the locale java uses to english with `-Duser.language=en` added to your java arguments (MultiMC and Prism do this automatically iirc).
+Report it to the mod author so they can fix it by using `.toLowerCase(Locale.Root)` in their code, and fix it for yourself by setting the locale java uses to English with `-Duser.language=en` added to your java arguments (MultiMC and Prism do this automatically).
 
 ### `java.lang.RuntimeException: Invalid id 4096 - maximum id range exceeded.`
 
@@ -293,7 +293,7 @@ Copied from a bot macro on the Modded Minecraft Discord.
 
 ### `Exception in thread "main" cpw.mods.niofs.union.UnionFileSystem$UncheckedIOException: java.io.IOException: Data error (cyclic redundancy check)`
 
-Some zip error. My assumption is corrupted jar file somehwere, try redownloading all mods.
+Some zip error. My assumption is corrupted jar file somewhere, try re-downloading all mods.
 
 ### `java.lang.IllegalArgumentException: Payload may not be larger than 1048576 bytes`
 You have too much stuff for normal minecraft to handle it. Add [Packet Fixer](https://modrinth.com/mod/packet-fixer) or a similar mod to fix this problem. Or remove mods until you are below the packet limit.
