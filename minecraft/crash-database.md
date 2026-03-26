@@ -87,7 +87,7 @@ Search your log for the first instance of `Exception caught during firing event`
 - `java.lang.IllegalStateException: Cannot get config value before config is loaded.`
 - `java.lang.IllegalStateException: Mod 'architectury' is not available!`
 - `java.util.NoSuchElementException: No value present`
-- `Caused by: java.lang.NullPointerException: Cannot invoke "net.minecraft.client.KeyMapping.getKey()" because "this.backKey" is null`
+- `java.lang.RuntimeException: java.lang.NullPointerException: Cannot invoke "net.minecraft.client.KeyMapping.getKey()" because "this.backKey" is null`
 
 
 Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
