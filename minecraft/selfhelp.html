@@ -5,7 +5,6 @@
       - looking at timestamp to not use old files
       - You got some file with a name like <code>hs_err_pid1234.TODO</code> and starting with <code>TODO</code>
       - link to spark website
-      - TODO: copy binary search instructions from modded mc discord
       - TODO: add screenshots of where on those sites the buttons/links are normally.
       - sections: crash-report, hs_err_pid, crash-find-file, watchdog, outofmemory, spark, disconnect
     -->
@@ -287,7 +286,17 @@
 	  Whenever something is caused by some mod and you have no better way of finding the causing mod,
 	  a binary search is a good old and trusty method.
 	  It works like this:
-	  TODO: copy binary search instructions from modded mc discord
+	  <ol>
+	  <li>Remove half of the existing things, and put them aside.</li>
+	  <li>Run the program / game.</li>
+	  <li>Does the issue still exist?
+	    <ul>
+	      <li>If <b>YES</b>: Repeat from step 1 with the current things.</li>
+	      <li>IF <b>NO</b>: Swap out the current things with the ones set aside, and repeat from step 1.</li>
+	    </ul>
+	  </li>
+	  <li>Repeat this process until the problematic thing/s have been found.</li>
+	  </ol>
 	</li>
 	<li>
 	  <b>Ask for help</b>
