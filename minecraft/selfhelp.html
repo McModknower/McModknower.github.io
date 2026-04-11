@@ -8,7 +8,6 @@
       - TODO: copy binary search instructions from modded mc discord
       - TODO: add screenshots of where on those sites the buttons/links are normally.
       - sections: crash-report, hs_err_pid, crash-find-file, watchdog, outofmemory, spark, disconnect
-      - <code>mixin.feature.spam_thread_dump=true</code> in <code>modernfix-mixins.properties</code>
     -->
   <head>
     <meta charset="utf-8" />
@@ -254,9 +253,12 @@
       <h2>Making and interpreting a thread dump</h2>
       If your game froze, and you have no other leads, a thread dump is the most viable option to get more info.
       It dumps what the code is currently doing, so if it is stuck on one specific thing, it will be listed inside here.
-      First create one using one of the methods described on <a href="https://www.baeldung.com/java-thread-dump">https://www.baeldung.com/java-thread-dump</a>.
-      Then look into the file and search for thre stack traces following <code>"Server thread"</code> and <code>"Render thread"</code>.
-      Maybe there is some mod mentioned there, but reading them is always adviseable.
+      If you have <a href="https://modrinth.com/mod/modernfix">modernfix</a> installed, you can enable its spamming thread dump feature by adding a new line with <code>mixin.feature.spam_thread_dump=true</code> to the end of the <code>modernfix-mixins.properties</code> config file. This makes a thread dump in regular intervals.
+      Do the config changes, then restart your Minecraft, trigger the issue again, wait for 2-3 minutes so the problem gets dumped.
+      If that modernfix config option is not working for you (no modernfix in your pack, modernfix conflicting with some other mod, ...), create one using one of the methods described on <a href="https://www.baeldung.com/java-thread-dump">https://www.baeldung.com/java-thread-dump</a>.
+      Then look into the file and search for the stack traces following <code>"Server thread"</code> and <code>"Render thread"</code>.
+      Sometimes when you loaded into a world, but something went wrong during crashing, <code>"Server thread"</code> is no longer there and you need to look for the last time <code>Server thread</code> appeared normally in the log.
+      Maybe there is some mod mentioned there, but reading them is always advisable.
       If they contain something about <code>.getChunk</code>, this indicates they are currently getting/loading/generating a chunk.
       In that case looking into the worker threads <code>"Worker-Main-</code> is also a good idea.
     </section>
