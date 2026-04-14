@@ -3,9 +3,9 @@
   <!--
       TODOs:
       - looking at timestamp to not use old files
-      - You got some file with a name like <code>hs_err_pid1234.TODO</code> and starting with <code>TODO</code>
       - link to spark website
       - sections: crash-report, hs_err_pid, crash-find-file, watchdog, outofmemory, spark, disconnect
+      - mixin.feature.spam_thread_dump=true
     -->
   <head>
     <meta charset="utf-8" />
@@ -226,6 +226,37 @@
     <section id="lag">
       <h2>So you have a lag problem</h2>
       <div>
+	<h3>TPS vs. FPS Problems</h3>
+	To be able to properly diagnose your problem, you should be able to differentiate between server/TPS lag on the one hand and client/FPS lag on the other.
+	In addition to these descriptions here, you can also use your F3 screen (see next subsection) to figure out what kind of lag you have (if you can open it).
+
+	<p>
+	  If you have only <b>Server/TPS lag</b>, the mobs and machines on the server are slower than normal.
+	  If you are riding a minecart/horse/pig/whatever you might not be able to dismount, or it might take some more time.
+	</p>
+	<p>
+	  <b>Client/FPS lag</b> means your screen is stuttering, you get noticeably less frames.
+	  Sometimes people also call it a slideshow, especially if you get only 1-2 frames per second or less.
+	</p>
+      </div>
+      <div>
+	<h3>Using your F3 screen & Task manager</h3>
+	<p>
+	  Your F3 screen shows some values that are interesting for debugging lag problems:
+	  The FPS: if this is below 30, you have Client/FPS lag.
+	  The TPS and MSPT: if TPS is below 20, or if MSPT is above 50 you have Server/TPS lag.
+	  The Memory/RAM allocation and usage:
+	  If the used memory is close to 100%, you should allocate more ram to Minecraft or have less stuff.
+	</p>
+	<p>
+	  Your Task manager is also helpful.
+	  If your task manager shows that your system ram is nearly fully used,
+	  you should allocate LESS ram to Minecraft or close some programs you don't need.
+	  If your task manager shows that your system cpu is nearly fully used,
+	  you can either continue following this guide to find lag problems inside Minecraft, or close some cpu using programs you don't need. 
+	</p>
+      </div>
+      <div>
 	<h3>laggy datapacks</h3>
 	First, remove known sources of lag:
 	Any datapack (or datapack packaged as mod) that checks entity nbt, for example to provide dynamic light.
@@ -239,7 +270,10 @@
       </div>
       <div>
 	<h3>Making a spark report</h3>
-	If you still experience lag after doing the steps above, its time to make a <a href="TODO">spark</a> report
+	If you still experience lag after doing the steps above, its time to make a <a href="https://spark.lucko.me/">spark profiler</a> report.
+	After installing the mod, you can use
+	<code>/spark profiler start --timeout 50</code> to start a profiler that records stats about the cpu usage of the server thread for 50 seconds.
+	Since it profiles the server thread, it is useful for tps problems
       </div>
     </section>
 
