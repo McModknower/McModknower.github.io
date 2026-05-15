@@ -153,6 +153,11 @@ For Example in the following case, ComputerCraft (aka `cc: tweaked`) is the mod 
 This is a nice example where one mod is missing its dependency, but it is not as nicely formatted as below under `Missing or unsupported mandatory dependencies:`.
 In the log this is from, Embeddium (which is a forge port of Sodium) was missing, and Oculus (which is a forge port of Iris) requires it to work.
 
+### `java.lang.RuntimeException: Could not load super class com/finderfeed/fdlib/nbt/AutoSerializable of com/finderfeed/cataclysm_custscenes/entities/maledictus/MaledictusCutsceneEntity`
+The second class (`com/finderfeed/cataclysm_custscenes/entities/maledictus/MaledictusCutsceneEntity`) requires the first class (`com/finderfeed/fdlib/nbt/AutoSerializable`), 
+but java could not find the first class.
+In this example case, cataclysm_custscenes (aka Cinematic Cataclysm) requires fdlib.
+
 ### `java.lang.NoSuchMethodError`, `java.lang.NoSuchFieldError`, and `java.lang.IncompatibleClassChangeError`
 This is similar to the errors about classes above, but i only know of it in cases where mod A was made for a different version of mod B.
 
