@@ -44,7 +44,7 @@ This line looks like the following:
 [04Apr2025 22:53:51.730] [Render thread/ERROR] [net.neoforged.fml.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent to a broken mod state
 ```
 If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editor's/log viewer's search feature to go to the first one, then go up to the closest exception.
-Often times the problem is in a stack trace that is directly after line containing `Failed to create mod instance`, `Failed to register automatic subscribers` or `Error during pre-loading phase:`. If a line containing that exists, the problem is very likely in that stack trace.
+Often times the problem is in a stack trace that is directly after line containing `Failed to create mod instance`, `Failed to register automatic subscribers`, `Exception caught during firing event:` or `Error during pre-loading phase:`. If a line containing that exists, the problem is very likely in that stack trace.
 
 If the latest log does not contain the error, you have to check one of the other files listed here, most likely the crash report.
 
@@ -88,7 +88,7 @@ Search your log for the first instance of `Exception caught during firing event`
 - `java.lang.IllegalStateException: Mod 'architectury' is not available!`
 - `java.util.NoSuchElementException: No value present`
 - `java.lang.RuntimeException: java.lang.NullPointerException: Cannot invoke "net.minecraft.client.KeyMapping.getKey()" because "this.backKey" is null`
-
+- `Caused by: net.minecraft.server.ChainedJsonException: Invalid shaders/core/elytratrims_gateway.json: File not found`
 
 Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
 More about those messages is written above in the [latest.log](#codelatestlogcode) section.
