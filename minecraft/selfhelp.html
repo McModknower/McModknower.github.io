@@ -3,7 +3,7 @@
   <!--
       TODOs:
       - looking at timestamp to not use old files
-      - sections: crash-report, hs_err_pid, crash-find-file, watchdog, outofmemory, spark, disconnect
+      - sections: crash-report, hs_err_pid, latest-log, crash-find-file, watchdog, outofmemory, spark, disconnect
     -->
   <head>
     <meta charset="utf-8" />
@@ -199,6 +199,9 @@
 	  <h3>JVM crash report</h3>
 	  You got some file with a name like <code>hs_err_pid1234.log</code> and starting with <code># A fatal error has been detected by the Java Runtime Environment:</code> in the instance/game directory (aka <code>.minecraft</code>).
 	</a>
+	<a href="#latest-log">
+	  <h3>latest.log</h3>
+	  You got a file named <code>latest.log</code> or have a launcher that shows you the log directly (MultiMC, Prism Launcher, ...). It is normally a few megabytes in size and starts does not start with one of the things named in the other file types.
 	<a href="#crash-find-file">
 	  <h3>I don&apos;t know</h3>
 	  You have no idea what a crash report or jvm crash report is,
@@ -235,6 +238,10 @@
     </section>
     <section id="hs_err_pid">
       <h2>What to do with a JVM crash report</h2>
+      TODO
+    </section>
+    <section id="latest-log">
+      <h2>What to do with a latest.log</h2>
       TODO
     </section>
     <section id="crash-find-file">
