@@ -89,6 +89,8 @@ Search your log for the first instance of `Exception caught during firing event`
 - `java.util.NoSuchElementException: No value present`
 - `java.lang.RuntimeException: java.lang.NullPointerException: Cannot invoke "net.minecraft.client.KeyMapping.getKey()" because "this.backKey" is null`
 - `Caused by: net.minecraft.server.ChainedJsonException: Invalid shaders/core/elytratrims_gateway.json: File not found`
+- `java.lang.NullPointerException: Initializing game`
+
 
 Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
 More about those messages is written above in the [latest.log](#codelatestlogcode) section.
