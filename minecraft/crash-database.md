@@ -7,7 +7,8 @@ This file will contain a bunch of error messages from modded Minecraft crashes, 
 Most of the stuff i write about here is stuff i found in logs people asked for help with on the [Modded Minecraft Discord](https://discord.gg/moddedmc).
 If you need more help than this guide can provide, i can only recommend asking over there.
 
-IMPORTANT: before changing stuff in a world you played on, **DO A BACKUP**. You might lose all progress in your world otherwise. And like a friend of mine told me:
+> [!IMPORTANT] 
+> Before changing stuff in a world you played on, **DO A BACKUP**. You might lose all progress in your world otherwise. And like a friend of mine told me:
 > No backup, no mercy.
 
 ## Useful links
@@ -16,7 +17,8 @@ Firstly, here are some links for more info or help:
 - [Modded Minecraft Usual Suspects](usual-suspects.md) (my own list on mods/data packs to suspect first if anything acts up)
 - [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative CurseForge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
 - [MultiMC FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic troubleshooting like having the wrong java version)
-- [superpowers04's recommendations & co](https://github.com/superpowers04/superpowers04/wiki/mc-info) (What mods to use, what mods/"launchers"/... to avoid)
+- [Prism Launcher Wiki](https://prismlauncher.org/wiki/) (useful for basic troubleshooting if using Prism Launcher)
+- [superpowers04's recommendations](https://superpowers04.neocities.org/wiki/) (pages containing minecraft information, recommendations, what you should avoid, etc) 
 - [Modded Minecraft Discord](https://discord.gg/moddedmc) and the [Modded Minecraft](https://www.reddit.com/r/feedthebeast/) subreddit it is affiliated with. (good for asking for help with your problems)
 - [My own link collection](../where-do-i-find) (a lot of discords, and some other stuff)
 
@@ -293,20 +295,19 @@ Some json file is broken. If this happens on a server, check if your `banned-ips
 
 ### `Exception message: net.minecraft.ResourceLocationException: Non [a-z0-9/._-] character in path of location: dndecor:\u0131ndustrial_frontlight`
 
-This `\u0131` character is a lowercase dotless I. It happens when your system is set to a locale where that character is the lowercase variant of the normal uppercase I and some mod tries to automatically generate IDs from text that contains an uppercase I.
+This `\u0131` character is a lowercase dotless `I`. It happens when your system is set to a locale where that character is the lowercase variant of the normal uppercase `I` and some mod tries to automatically generate IDs from text that contains an uppercase `I`.
 Report it to the mod author so they can fix it by using `.toLowerCase(Locale.Root)` in their code, and fix it for yourself by setting the locale java uses to English with `-Duser.language=en` added to your java arguments (MultiMC and Prism do this automatically).
 
 ### `java.lang.RuntimeException: Invalid id 4096 - maximum id range exceeded.`
 
 > This is caused by adding too many mods which add blocks. The solution is to add the Roughly Enough ID’s mod, which extends the limits for blocks, items, and biomes.
-> Download the mod from Curseforge: https://www.curseforge.com/minecraft/mc-mods/reid
-> If you use the latest release of REID, you will also need it’s dependency: https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap
+> Download the mod from [Modrinth](https://modrinth.com/mod/reid) or [Curseforge](https://www.curseforge.com/minecraft/mc-mods/reid)
+> If you use the latest release of REID, you will also need mixinbootstrap from [Modrinth](https://modrinth.com/mod/mixinbootstrap) or [Curseforge](https://www.curseforge.com/minecraft/mc-mods/mixinbootstrap)
 
 Copied from a bot macro on the Modded Minecraft Discord.
 
 ### `Exception in thread "main" cpw.mods.niofs.union.UnionFileSystem$UncheckedIOException: java.io.IOException: Data error (cyclic redundancy check)`
-
-Some zip error. My assumption is corrupted jar file somewhere, try re-downloading all mods.
+An error while loading a jar. One of your mods probably corrupted, if it lists a specific jar file, reinstall that jar. Else re-download all mods. 
 
 ### `java.lang.IllegalArgumentException: Payload may not be larger than 1048576 bytes`
-You have too much stuff for normal minecraft to handle it. Add [Packet Fixer](https://modrinth.com/mod/packet-fixer) or a similar mod to fix this problem. Or remove mods until you are below the packet limit.
+Your playerdata, an entity in the world, a chunk, or similar is too big. Add [Packet Fixer](https://modrinth.com/mod/packet-fixer) or a similar mod to fix this problem. Or remove mods until you are below the packet limit.
