@@ -46,7 +46,7 @@ This line looks like the following:
 [04Apr2025 22:53:51.730] [Render thread/ERROR] [net.neoforged.fml.ModLoader/]: Cowardly refusing to send event net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent to a broken mod state
 ```
 If you see any line like this (starting with `Cowardly refusing to send event` and ending with `to a broken mod state`), that means the real error happened before the first one of these lines. Scroll up or use you editor's/log viewer's search feature to go to the first one, then go up to the closest exception.
-Often times the problem is in a stack trace that is directly after line containing `Failed to create mod instance`, `Failed to register automatic subscribers`, `Exception caught during firing event:` or `Error during pre-loading phase:`. If a line containing that exists, the problem is very likely in that stack trace.
+Often times the problem is in a stack trace that is directly after line containing `Failed to create mod instance`, `Failed to register automatic subscribers`, `Exception caught during firing event:`, `Error during pre-loading phase:` or `encountered an error in a deferred task`. If a line containing that exists, the problem is very likely in that stack trace.
 
 If the latest log does not contain the error, you have to check one of the other files listed here, most likely the crash report.
 
