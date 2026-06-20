@@ -87,15 +87,18 @@ Search your log for the first instance of `Exception caught during firing event`
 ### Stuff during mod loading likely caused by an invalid state since previous errors didn't let the mods loads correctly
 
 - `java.lang.IllegalStateException: Cannot get config value before config is loaded.`
-- `java.lang.IllegalStateException: Mod 'architectury' is not available!`
 - `java.util.NoSuchElementException: No value present`
+- `java.lang.NullPointerException: Initializing game`
 - `java.lang.RuntimeException: java.lang.NullPointerException: Cannot invoke "net.minecraft.client.KeyMapping.getKey()" because "this.backKey" is null`
 - `Caused by: net.minecraft.server.ChainedJsonException: Invalid shaders/core/elytratrims_gateway.json: File not found`
-- `java.lang.NullPointerException: Initializing game`
+- `java.lang.IllegalStateException: Mod 'architectury' is not available!`
+- `java.lang.NullPointerException: Mod with id iris not found in ModList`
 
 
-Very likely caused by some other problem in the log. Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
-More about those messages is written above in the [latest.log](#codelatestlogcode) section.
+Very likely caused by some other problem in the log.
+For the ones involving a name (`this.backKey`, `elytratrims_gateway.json`, `architectury`, `iris`) this applies even if that name is different.
+Check the log for `Cowardly refusing to send event`, `Failed to create mod instance` or `Failed to register automatic subscribers` lines.
+More about those messages (and other lines to search for) is written above in the [latest.log](#codelatestlogcode) section.
 
 If there is no such line in the latest.log, this can also be the real problem (and as such the real stack trace).
 
