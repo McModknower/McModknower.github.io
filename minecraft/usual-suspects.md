@@ -17,6 +17,16 @@ Also [superpowers04's Recommendations On What To Avoid](https://github.com/super
   - Relics compatibility/add-ons
   - cobblemon mega showdown
 
+## (In)compatibility list for mods I deem important (based on how often I see them in logs)
+- relics-1.21.1-0.12.8.jar (latest as of 2026-07-21, version from 2026-05-28):
+  - Compatible
+    - Aquaculture-1.21.1-2.7.21.jar
+    - create-1.21.1-6.0.10.jar
+    - reliquified\_artifacts-1.21.1-1.0.7.jar
+  - Incompatible
+    - rarcompat-1.21-0.9.7.jar (from 2025-08-12, working update available: reliquified\_artifacts-1.21.1-1.0.7.jar)
+    - relicsofrain-0.3.1+1.21.1.jar (from 2025-08-13)
+
 # Weird Bugs
 Stuff you can't describe well, unreadable stack traces/logs, ...
 
