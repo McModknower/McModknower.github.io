@@ -5,6 +5,7 @@ Modded Minecraft Link collection
 - [Modded Minecraft Crash Database](crash-database): Collection of exceptions and causes. If you have a crash, go here.
 - [Modded Minecraft Usual Suspects](usual-suspects): Mods known for incompatibilites, performance problems, etc.
 - [Modded Minecraft Self Help Guide](selfhelp): WIP site for helping yourself with a modded minecraft problem
+- [McModknower's Ram Recommendation](ram): What to set your RAM allocation to / how to figure out what to set it to.
 
 
 ## Performance Mods
