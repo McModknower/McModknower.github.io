@@ -319,3 +319,9 @@ Your playerdata, an entity in the world, a chunk, or similar is too big. Add [Pa
 ### `java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist`
 Galosphere removed the silver ingot in an update, at a time where a bunch of other mods no longer supported/updated their mc 1.20.1 versions.
 [Create: Fixed](https://www.curseforge.com/minecraft/mc-mods/create-fixed) fixes this IF you are in mc 1.20.1 AND have create.
+
+### `java.util.ConcurrentModificationException: null`
+Either you have some mod in the stacktrace below the exception, or its time for a [binary search](selfhelp#other).
+If the line above says `[Render thread/ERROR] [net.minecraft.client.Minecraft/]: Shutdown failure!`,
+Minecraft failed while shutting down, and you probably got no crash report or stacktrace with the real problem.
+
