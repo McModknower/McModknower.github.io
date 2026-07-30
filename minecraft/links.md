@@ -31,3 +31,11 @@ Here are mods made to fix specific bugs, which you should only install when you 
   for when some entity or block entity is breaking your world.
 - [Create: Fixed](https://www.curseforge.com/minecraft/mc-mods/create-fixed) fixes some bugs on 1.20.1 create,
   including `java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist`
+
+## Discord Invite Links
+- Modded Minecraft Discord: https://discord.gg/moddedmc  
+  Description from the discord server: This is a place to discuss all things modded Minecraft from specific mods to epic modpacks and everything in-between.  
+  My summary: Talk about playing modded minecraft, making packs, get help with playing modded, making your own mods, making your own packs, or making datapacks.  
+- Mod Dev Zone: http://discord.moddev.zone/  
+  Description from the discord server: A modding community based around the game Minecraft with a splash of other things here and there! Welcome to those who love to mod games, program and just generally have fun!  
+  My summary: Making mods, Commissioning Modders/Artists, Channels for some Mods/modders, get help with making mods or crashes in your own modpack  
