@@ -99,6 +99,7 @@ Search your log for the first instance of `Exception caught during firing event`
 - `Caused by: net.minecraft.server.ChainedJsonException: Invalid shaders/core/elytratrims_gateway.json: File not found`
 - `java.lang.IllegalStateException: Mod 'architectury' is not available!`
 - `java.lang.NullPointerException: Mod with id iris not found in ModList`
+- `java.lang.IllegalStateException: Multiple servers running at once is not supported!`
 
 
 Very likely caused by some other problem in the log.
