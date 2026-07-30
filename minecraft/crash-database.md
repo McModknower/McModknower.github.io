@@ -59,6 +59,11 @@ JVM crash reports (`hs_err_pid<number>.log`) are very different and will be list
 
 ### Other problems without relevant stuff in the logs
 
+#### Freeze when opening the creative inventory on NeoForge 1.21.1
+If you have libJF v 3.17.4 or below, update to 3.17.5 or later.
+See https://git.jfronny.dev/JfMods/LibJF/issues/16 for more info
+or https://modrinth.com/mod/libjf/versions?g=1.21.1 for download links.
+
 #### black game, but working window decorations
 If your game looks like this, and you have both an integrated and dedicated graphics card,
 try setting Minecraft to run under the dedicated graphics card.
