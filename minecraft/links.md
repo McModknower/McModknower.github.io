@@ -7,6 +7,8 @@ Modded Minecraft Link Collection
 - [Modded Minecraft Self Help Guide](selfhelp): WIP site for helping yourself with a modded minecraft problem
 - [McModknower's Ram Recommendation](ram): What to set your RAM allocation to / how to figure out what to set it to.
 
+## Examples
+- [tlom-1.21.1.zip](tlom-1.21.1.zip): An example datapack with a pack.mcmeta and an .mcfunction file running every tick.
 
 ## Performance Mods
 There are some lists out there:

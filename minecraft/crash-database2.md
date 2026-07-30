@@ -22,3 +22,6 @@ You have iris but not sodium. Install sodium.
 java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist
 Galosphere removed the silver ingot in an update, at a time where a bunch of other mods no longer supported/updated their mc 1.20.1 versions.
 [Create: Fixed](https://www.curseforge.com/minecraft/mc-mods/create-fixed) fixes this IF you are in mc 1.20.1 AND have create.
+
+java.lang.NoClassDefFoundError: vectorwing/farmersdelight/common/block/ShepherdsPieBlock	at net.fixerlink.alexscavesdelight.alexscavesdelight.<init>:L32
+alexcavesdelight is not updated for farmersdelight. remove alexcavesdelight.
