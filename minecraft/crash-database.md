@@ -15,6 +15,7 @@ If you need more help than this guide can provide, i can only recommend asking o
 Firstly, here are some links for more info or help:
 
 - [Modded Minecraft Usual Suspects](usual-suspects.md) (my own list on mods/data packs to suspect first if anything acts up)
+- [Modded Minecraft Link Collection](links) where i collect all sorts of modded minecraft links not fitting into other pages
 - [Crash Assistant](https://modrinth.com/mod/crash-assistant) (mod that can help you with reading and sharing logs) [Alternative CurseForge link](https://www.curseforge.com/minecraft/mc-mods/crash-assistant)
 - [MultiMC FAQ](https://github.com/MultiMC/Launcher/wiki/FAQ) (useful for basic troubleshooting like having the wrong java version)
 - [Prism Launcher Wiki](https://prismlauncher.org/wiki/) (useful for basic troubleshooting if using Prism Launcher)
@@ -314,3 +315,7 @@ An error while loading a jar. One of your mods probably corrupted, if it lists a
 
 ### `java.lang.IllegalArgumentException: Payload may not be larger than 1048576 bytes`
 Your playerdata, an entity in the world, a chunk, or similar is too big. Add [Packet Fixer](https://modrinth.com/mod/packet-fixer) or a similar mod to fix this problem. Or remove mods until you are below the packet limit.
+
+### `java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist`
+Galosphere removed the silver ingot in an update, at a time where a bunch of other mods no longer supported/updated their mc 1.20.1 versions.
+[Create: Fixed](https://www.curseforge.com/minecraft/mc-mods/create-fixed) fixes this IF you are in mc 1.20.1 AND have create.

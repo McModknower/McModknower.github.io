@@ -1,4 +1,4 @@
-Modded Minecraft Link collection
+Modded Minecraft Link Collection
 ================================
 
 ## My Sites
@@ -29,3 +29,5 @@ Here are mods made to fix specific bugs, which you should only install when you 
   for when you have NBT tags nested to a depth of 512 or more.
 - [Nerunia](https://modrinth.com/mod/neruina) ([on CurseForge](https://www.curseforge.com/minecraft/mc-mods/neruina))
   for when some entity or block entity is breaking your world.
+- [Create: Fixed](https://www.curseforge.com/minecraft/mc-mods/create-fixed) fixes some bugs on 1.20.1 create,
+  including `java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist`
