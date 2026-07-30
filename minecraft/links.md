@@ -21,3 +21,11 @@ There are some lists out there:
 - https://observable.tas.sh Profile (Block) Entities, aggregate by type or chunk. Good for finding entities or places with entity buildups.
 - https://misode.github.io/report Website for viewing vanilla profiling reports. Good if you are looking which datapack is causing lags via commands, as Spark does not show this info.
 
+## Bug Fixing Mods
+There are a bunch of (general) bugfixing mods listed on <https://superstormer.github.io/useful-mods/>, you just have to change "Performance" to "Bug Fix" in the field at the top.
+Here are mods made to fix specific bugs, which you should only install when you actually need them.
+
+- [Long NBT Killer](https://modrinth.com/mod/long-nbt-killer) ([on CuseForge](https://www.curseforge.com/minecraft/mc-mods/long-nbt-killer))
+  for when you have NBT tags nested to a depth of 512 or more.
+- [Nerunia](https://modrinth.com/mod/neruina) ([on CurseForge](https://www.curseforge.com/minecraft/mc-mods/neruina))
+  for when some entity or block entity is breaking your world.
