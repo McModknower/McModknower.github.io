@@ -94,6 +94,7 @@ Search your log for the first instance of `Exception caught during firing event`
 
 - `java.lang.IllegalStateException: Cannot get config value before config is loaded.`
 - `java.util.NoSuchElementException: No value present`
+- `java.util.NoSuchElementException: null`
 - `java.lang.NullPointerException: Initializing game`
 - `java.lang.RuntimeException: java.lang.NullPointerException: Cannot invoke "net.minecraft.client.KeyMapping.getKey()" because "this.backKey" is null`
 - `Caused by: net.minecraft.server.ChainedJsonException: Invalid shaders/core/elytratrims_gateway.json: File not found`
