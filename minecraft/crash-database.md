@@ -332,3 +332,5 @@ Either you have some mod in the stacktrace below the exception, or its time for 
 If the line above says `[Render thread/ERROR] [net.minecraft.client.Minecraft/]: Shutdown failure!`,
 Minecraft failed while shutting down, and you probably got no crash report or stacktrace with the real problem.
 
+### `java.lang.IllegalStateException: Feature order cycle found, involved sources:`
+Install https://modrinth.com/mod/feature-recycler or remove one of the mods mentioned in the exception message.

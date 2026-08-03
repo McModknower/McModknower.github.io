@@ -33,6 +33,8 @@ Here are mods made to fix specific bugs, which you should only install when you 
   for when some entity or block entity is breaking your world.
 - [Create: Fixed](https://www.curseforge.com/minecraft/mc-mods/create-fixed) fixes some bugs on 1.20.1 create,
   including `java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist`
+- [Feature Recycler](https://modrinth.com/mod/feature-recycler)
+  fixes `java.lang.IllegalStateException: Feature order cycle found, involved sources:` for 1.20.1 and 1.21.1.
 
 ## Discord Invite Links
 - Modded Minecraft Discord: https://discord.gg/moddedmc  
