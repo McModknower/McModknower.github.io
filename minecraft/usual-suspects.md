@@ -51,6 +51,7 @@ Data packs i know that do this are:
   Use a client-side mod like [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) instead.
 - Enchants Plus: it has a Luminosity enchantment. Same problem as dynamic light data packs above.
   Also Ice Aspect and Gluttony check nbt data, but they are not as bad as Luminosity.
+- blockstaff (tested at v1.20.1): ![](usual-suspects-blockstaff.png)
 
 # Graphically Demanding Mods
 If your game is lagging, try disabling graphically demanding mods first, since they are, well, graphically demanding.
