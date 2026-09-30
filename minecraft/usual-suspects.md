@@ -5,6 +5,17 @@ This is a list of usual suspects in case of modded Minecraft problems.
 See also my [Modded Minecraft Crash Database](crash-database.html) for examples of crash reports and logs.
 Also [superpowers04's Recommendations On What To Avoid](https://github.com/superpowers04/superpowers04/wiki/MC-Recommendations-On-What-To-Avoid) are a good resource
 
+# Problems where the logs don't immediately point out the problem
+- Game freezes when you open the creative inventory: libjf 3.17.4 has this issue. If you have that version of libjf, install 3.17.5 or newer from [modrinth](https://modrinth.com/mod/libjf/versions?g=1.21.1).
+
+# Problems happening so often they deserver a mention here
+- iris 1.8.12 is incompatible with new sodium versions. Use 1.8.14 instead. You might need to click something to show beta versions.
+- tensura_ftb depends on ftb library, ftb teams, ftb chunks, and ftb quests, but does not declare it in a way for neoforge/fabric to show a nice message explaining this.
+  If you are missing any one of them, you are going to get a crash on startup with a `NoClassDefFoundError`.
+  I reports this [on their discord](https://discord.com/channels/831767201966456852/1550917435509448874) but have not gotten a response yet (as of 2026-09-30, 11 days after reporting it).
+- tectonic depends on lithostitched but does not declare it in a way for neoforge to show a nice message explaining this.
+  I just reported this [on their github](https://github.com/Apollounknowndev/tectonic/issues/534).
+
 # Crashing/Incompatibilities
 
 - Optifine (closed source, changes a lot of rendering related code, known for breaking mods)
