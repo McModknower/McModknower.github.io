@@ -10,6 +10,35 @@
 <meta name="generator" content="Org mode" />
 <meta name="author" content="McModknower" />
 <style type="text/css">
+  <!--/*--><![CDATA[/*><!--*/
+  :root { color-scheme: light dark; }
+  #content {
+      /* center the content */
+      margin-inline: auto;
+      /* contstrain the content width */
+      max-inline-size: 50rem;
+      /* ensure there is at least a bit of padding between the text and the edge of the viewport */
+      padding-inline: 2vw;
+      /* justify text so its easier to read */
+      text-align: justify;
+  }
+  .haskell-keyword { color: #a020f0; }
+  .haskell-type, .haskell-constructor { color: #228b22; }
+  .haskell-symbol { color: #a0522d; }
+  .haskell-function-definition { color: #0000ff; }
+  .paren-level-1 { color: #ff4b00; }
+  .haskell-string { color: #8b2252; }
+  @media (prefers-color-scheme: dark) {
+      .haskell-keyword { color: #c147ff; }
+      .haskell-type, .haskell-constructor { color: #61c257; }
+      .haskell-symbol { color: #c16f48; }
+      .haskell-function-definition { color: #a0a0ff; }
+      .paren-level-1 { color: #ffd700; }
+      .haskell-string { color: #ef80aa; }
+  }
+  /*]]>*/-->
+</style>
+<style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -46,11 +75,12 @@
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: Canvas;
+    color: CanvasText;
     top: -10px;
     right: 10px;
     padding: 3px;
-    border: 1px solid black;
+    border: 1px solid CanvasText;
   }
   pre.src:hover:before { display: inline;}
   /* Languages per Org manual */
@@ -297,7 +327,7 @@ datatype was chosen:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #a020f0;">data</span> <span style="color: #228b22;">Polynom</span> <span style="color: #a0522d;">=</span> <span style="color: #228b22;">DegreeN</span> <span style="color: #228b22;">Float</span> <span style="color: #228b22;">Polynom</span> <span style="color: #a0522d;">|</span> <span style="color: #228b22;">Degree0</span> <span style="color: #228b22;">Float</span> <span style="color: #a020f0;">deriving</span> <span style="color: #228b22;">Show</span>
+<pre class="src src-haskell"><span class="haskell-keyword">data</span> <span class="haskell-type">Polynom</span> <span class="haskell-symbol">=</span> <span class="haskell-constructor">DegreeN</span> <span class="haskell-type">Float</span> <span class="haskell-type">Polynom</span> <span class="haskell-symbol">|</span> <span class="haskell-constructor">Degree0</span> <span class="haskell-type">Float</span> <span class="haskell-keyword">deriving</span> <span class="haskell-type">Show</span>
 </pre>
 </div>
 
@@ -333,8 +363,8 @@ know a bit haskell, you might want to figure how it works on you own.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #0000ff;">degreeOf</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">Polynom</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">Int</span>
-<span style="color: #0000ff;">degreeOf</span> polynom <span style="color: #a0522d;">=</span> length <span style="color: #ffffff;">(</span>filter <span style="color: #ffd700;">(</span><span style="color: #a0522d;">==</span><span style="color: #8b2252;">'N'</span><span style="color: #ffd700;">)</span> <span style="color: #ffd700;">(</span>show polynom<span style="color: #ffd700;">)</span><span style="color: #ffffff;">)</span>
+<pre class="src src-haskell"><span class="haskell-function-definition">degreeOf</span> <span class="haskell-symbol">::</span> <span class="haskell-type">Polynom</span> <span class="haskell-symbol">-&gt;</span> <span class="haskell-type">Int</span>
+<span class="haskell-function-definition">degreeOf</span> polynom <span class="haskell-symbol">=</span> length (filter <span class="paren-level-1">(</span><span class="haskell-symbol">==</span><span class="haskell-string">'N'</span><span class="paren-level-1">)</span> <span class="paren-level-1">(</span>show polynom<span class="paren-level-1">)</span>)
 </pre>
 </div>
 </div>
@@ -402,9 +432,9 @@ recursion like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #0000ff;">degreeOf</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">Polynom</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">Int</span>
-<span style="color: #0000ff;">degreeOf</span> <span style="color: #ffffff;">(</span><span style="color: #228b22;">Degree0</span> <span style="color: #a020f0;">_</span><span style="color: #ffffff;">)</span>      <span style="color: #a0522d;">=</span> 0
-<span style="color: #0000ff;">degreeOf</span> <span style="color: #ffffff;">(</span><span style="color: #228b22;">DegreeN</span> <span style="color: #a020f0;">_</span> rest<span style="color: #ffffff;">)</span> <span style="color: #a0522d;">=</span> 1 <span style="color: #a0522d;">+</span> degreeOf rest
+<pre class="src src-haskell"><span class="haskell-function-definition">degreeOf</span> <span class="haskell-symbol">::</span> <span class="haskell-type">Polynom</span> <span class="haskell-symbol">-&gt;</span> <span class="haskell-type">Int</span>
+<span class="haskell-function-definition">degreeOf</span> (<span class="haskell-constructor">Degree0</span> <span class="haskell-keyword">_</span>)      <span class="haskell-symbol">=</span> 0
+<span class="haskell-function-definition">degreeOf</span> (<span class="haskell-constructor">DegreeN</span> <span class="haskell-keyword">_</span> rest) <span class="haskell-symbol">=</span> 1 <span class="haskell-symbol">+</span> degreeOf rest
 </pre>
 </div>
 
