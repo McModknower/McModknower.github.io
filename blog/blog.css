@@ -10,6 +10,11 @@ hgroup {
     text-align:center;
 }
 
+main {
+    /* ensure there is at least a bit of padding between the text and the edge of the viewport */
+    padding-inline: 2vw;
+}
+
 article {
     /* center the article */
     margin-inline: auto;
