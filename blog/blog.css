@@ -1,0 +1,65 @@
+:root {
+    /* allow dark mode */
+    color-scheme: light dark;
+    /* allow text to be broken inside words with hyphens */
+    /* hyphens: auto; */
+}
+
+hgroup {
+    /* center title and subtitle */
+    text-align:center;
+}
+
+article {
+    /* center the article */
+    margin-inline: auto;
+    /* contstrain the article width */
+    max-inline-size: 50rem;
+    /* ensure there is at least a bit of padding between the text and the edge of the viewport */
+    padding-inline: 2vw;
+    /* justify text so its easier to read */
+    text-align: justify;
+}
+
+* {
+    /* when clicking links to anchors within the file, leave some margin between the top of the viewport and the start of the anchor */
+    scroll-margin-block-start: 2em;
+}
+
+:target {
+    /* make visible what part of the page was linked to */
+    outline: dashed;
+}
+
+.flex {
+    /* responsive design: on wide screens show stuff next to each other, on small screens show them below each other */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.flex > figure {
+    /* ensure two figures fit next to each other */
+    width: 20rem;
+}
+
+img {
+    /* ensure images don't escape the width of the figure */
+    max-width:100%;
+}
+
+.nowrap {
+    /* don't wrap text that should not be wrapped (inside equations etc) */
+    text-wrap-mode: nowrap;
+}
+
+body {
+    /* leave some space at the bottom of the veiwport */
+    padding-bottom: 2vw;
+}
+
+footer {
+    text-align: center;
+    padding: 1rex;
+    color: GrayText;
+}

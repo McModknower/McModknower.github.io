@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Averaging Random Offsets To Find The Underlying Number(s)</title>
+    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+    <link rel="stylesheet" href="../blog.css">
+  </head>
+  <body>
+    <hgroup>
+      <h1>Averaging Random Offsets To Find The Underlying Number(s)</h1>
+      <p>A theoretical attack on NoTextureRotations stable random mode before its rework in 1.0.5</p>
+    </hgroup>
+    <article>
+      <section>
+	<h2 id="abstract">Abstract</h2>
+	This blog post describes what the Minecraft mod NoTextureRotations does
+	and how its old stable random mode can be defeated in theory by combining many samples.
+	By using a python script to simulate receiving multiple positions repeatedly,
+	it is indicated how quickly these techniques converge towards the real position.
+	Afterwards an adjustment of the stable random mode that was added in 1.0.5 of the mod is showcased,
+	which removes the viability of these attacks
+	by ensuring the combination converges towards a position within the chunk at 0,0.
+	This shows that sensitive data needs to be properly masked
+	before involving it in computations where the results are obersvable by an attacker.
+      </section>
+      <nav class="toc" aria-labelledby="toc-label">
+	<h2 id="toc-label">Sections</h2>
+	<ul>
+	  <li><a href="#introduction">Texture Rotations In Minecraft</a></li>
+	  <li><a href="#notexturerotations">What does NoTextureRotations do?</a></li>
+	  <li><a href="#the-problem">The Problem With Random Offsets</a></li>
+	  <li><a href="#the-fix">How this was fixed</a></li>
+	  <li><a href="#conclusion">Conclusion</a></li>
+	</ul>
+      </nav>
+      <section>
+	<h2 id="introduction">Texture Rotations In Minecraft</h2>
+	Minecraft is a well-known game where the world is made up of voxels, better known to players as blocks.
+	Since each block has the same size and is aligned, using the same texture for all blocks of a type causes repeating patterns to be visible as seen in <a href="#fig-1">Figure 1</a>.
+	To prevent those repeating patterns with natural blocks like grass and stone,
+	Minecraft rotates the textures of these based on the coordinates of the block,
+	resulting in less to no visible repeating patterns as seen in <a href="#fig-2">Figure 2</a>.
+	Since the rotations are only based on the coordinates and the function mapping the coordinates to a rotation is fast,
+	one can brute force all possible locations and check if the rotations of the blocks there match the rotations of the blocks in some image.
+	All this is described on <a href="https://seedcrack.com/docs/usage">seedcrack.com</a>,
+	where there are also tools to do this brute force search.
+	<div class="flex">
+	  <figure id="fig-1">
+	    <img src="texture-rotation-none.png"/>
+	    <figcaption>Figure 1: Some Minecraft blocks without texture rotations</figcaption>
+	  </figure>
+	  <figure id="fig-2">
+	    <img src="texture-rotation-vanilla.png"/>
+	    <figcaption>Figure 2: Some Minecraft blocks with vanilla texture rotations</figcaption>
+	  </figure>
+	</div>
+      </section>
+      <section>
+	<h2 id="notexturerotations">What does NoTextureRotations do?</h2>
+	To prevent bruteforcing the position of screenshots shared on the internet,
+	especially on competitve and anarchy servers without strong base protection mechanisms,
+	people made various remedies:
+	<a href="https://modrinth.com/resourcepack/anti-block-rotation">a</a>
+	<a href="https://modrinth.com/resourcepack/anti-block-rotation-deepslate">plethora</a>
+	<a href="https://modrinth.com/resourcepack/crpt_x-anti-rotation">of</a>
+	<a href="https://modrinth.com/resourcepack/no-more-deepslate-rotation">resource</a>
+	<a href="https://modrinth.com/discover/resourcepacks?q=rotation">packs</a>
+	with various degrees of completeness and effectiveness,
+	as well as the <a href="https://modrinth.com/mod/notexturerotations">NoTextureRotations</a> mod,
+	which changes the code responsible for mapping the position of a block to the texture rotation it should use, thus affecting all blocks.
+	It had (as of 1.0.4) 3 different modes: No Rotations, Random, and Stable Random.
+	The No Rotations mode is self explanatory, and is how i made <a href="#fig-1">Figure 1</a>.
+	In the Random mode, on each call to the function,
+	a new random number is generated using Java's secure random number generator (<a href="#fig-3">Fig. 3</a>).
+	In the Stable Random mode, for each chunk (16x16 column of the world) requesting texture rotations
+	a random offset is generated via Java's secure random number,
+	which is then added to the x and z coordinates
+	with the intent to obfuscate the real coordinates (<a href="#fig-4">Fig. 4</a>).
+	<div class="flex">
+	  <figure id="fig-3">
+	    <img src="texture-rotation-random.png"/>
+	    <figcaption>Figure 3: Some Minecraft blocks with the Random mode</figcaption>
+	  </figure>
+	  <figure id="fig-4">
+	    <img src="texture-rotation-stable-random.png"/>
+	    <figcaption>Figure 4: Some Minecraft blocks with the Random Offset mode</figcaption>
+	  </figure>
+	</div>
+      </section>
+      <section>
+	<h2 id="the-problem">The Problem With Random Offsets</h2>
+	<p>
+	  The random offset lies within the range of -1,000,000 to +1,000,000.
+	  So bruteforcing one position obfuscated with the Stable Random mode gives a big area where the real coordinates may be.
+	  However as soon as you get another different random offset for the same in game position,
+	  like another screenshot from a different game session,
+	  you can reduce the search range by overlapping the possible regions from both obfuscated coordinates.
+	  For example if the first obfuscated x coordinate was -186962 and the second was 31018,
+	  the real position must be between 31018-1000000=-968982 and -186962+1000000=813038,
+	  resulting in a search range of 813038-(-968982)=1782020 blocks,
+	  which is 1782020*100/2000000 = 89.101% of the original 2,000,000 blocks.
+	  Receiving more obfuscated coordinates gives this technique more chances
+	  to converge the search range closer to the real position.
+	</p>
+	<p>
+	  Another attack is averaging the results of multiple obfuscated coordinates.
+	  If you roll a dice multiple times and average the results,
+	  you are likely to converge towards 3.5.
+	  Similarly using the example numbers from the paragraph above,
+	  we get an average of (-186962+31018)/2=-77972.0,
+	  which is with a distance of <span class="nowrap">|-77972.0-(-22290)| = 55682.0</span> about 3 times as close to the real value as
+	  the first number with a distance of <span class="nowrap">|-186962-(-22290)| = 164672</span>
+	  and about as close as the second number with a distance of <span class="nowrap">|31018-(-22290)| = 53308</span>.
+	  Similarly to the attack above, this attack gets results closer to the real position by receiving more obfuscated coordinates.
+	</p>
+	<p>
+	  Amplifying these problems are two implementation choices.
+	  By not offsetting the y coordinate, bruteforcing one set of obfuscated coordinates allows
+	  other searches to be constrained to that y coordinate, speeding them up massively.
+	  The more drastic problem however is that the same offset is used for both the x and z coordinate,
+	  resulting in the obfuscated coordinates being on the same diagonal line as the real coordinates,
+	  so the actual area you would have to search ingame is not the entire &pm;1,000,000 square in both x and z directions,
+	  but just the diagonal line with the center being the obfuscated coordinates (<a href="#fig-5">Fig. 5</a>).
+	</p>
+	<div class="flex">
+	  <figure id="fig-5">
+	    <img src="diagonal-search-area.png"/>
+	    <figcaption>Figure 5: The obfuscated coordinates (white square in the center), the search area if the x and z offset were independent (blue hatched background), and the current search area (diagonal yellow line).</figcaption>
+	  </figure>
+	</div>
+
+	<p>
+	  To show how fast the two attacks give usable results,
+	  there is a <a href="generate-graphs.py">python script</a> that simulates 10,000 different runs of 100 obfuscated coordinate values (along one axis),
+	  and creates graphs for the percentiles of range (<a href="#fig-6">Fig. 6</a>) and average (<a href="#fig-7">Fig. 7</a>).
+	  The area under each line contains 10% more samples than the line below it,
+	  with the lowest line being the samples closest to the true coordinate / with the smallest range,
+	  and the highest line being the samples furthest from the true coordinate / with the biggest range.
+	</p>
+	<div class="flex">
+	  <figure id="fig-6">
+	    <img src="range-restricting.svg"/>
+	    <figcaption>Figure 6: Percentiles of the range restricting attack</figcaption>
+	  </figure>
+	  <figure id="fig-7">
+	    <img src="averaging.svg"/>
+	    <figcaption>Figure 7: Percentiles of the averaging attack</figcaption>
+	  </figure>
+	</div>
+      </section>
+      <section>
+	<h2 id="the-fix">How this was fixed</h2>
+	<a href="https://github.com/rfresh2/NoTextureRotations/commit/04dec7844e2e4572bc80d96113cb86687378b7f2">The fix commit</a> for these attacks masks out all but the bottom 4 bits. This causes the offset to be added to the position relative to the current chunk (so in the range 0-15).
+	As such using the attacks described above on the resulting obfuscated coordinates only results in positions close to the chunk at 0,0 being found, regardless of the actual coordinates.
+      </section>
+      <section>
+	<h2 id="conclusion">Conclusion</h2>
+	<p>
+	  The attacks presented here show that one should never carelessly involve potentially sensitive information
+	  in calculations where an attacker might observe the result.
+	  Sensitive information should be either entirely removed,
+	  partially redacted (as done in the fix for this),
+	  or masked in a way that makes it mathematically impossible to get it back.
+	</p>
+	<p>
+	  From an organizational side,
+	  the software being open source and the developer responding and caring about their program
+	  greatly contributed to this problem being discovered and fixed quickly.
+	  There are likely other programs that would benefit from having more eyes checking them,
+	  looking for ways to attack them, and looking for ways how to prevent those attacks.
+	</p>
+	<p>
+	  And a final word for all those using NoTextureRotations in an older version: update to 1.0.5.
+	</p>
+      </section>
+      <footer>McModknower - 2026-10-03 - text and figures 5-7 are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></footer>
+    </article>
+  </body>
+</html>
