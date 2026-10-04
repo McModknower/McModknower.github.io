@@ -25,3 +25,6 @@ Galosphere removed the silver ingot in an update, at a time where a bunch of oth
 
 java.lang.NoClassDefFoundError: vectorwing/farmersdelight/common/block/ShepherdsPieBlock	at net.fixerlink.alexscavesdelight.alexscavesdelight.<init>:L32
 alexcavesdelight is not updated for farmersdelight. remove alexcavesdelight.
+
+java.lang.IllegalArgumentException: Soup base with name minecraft:milk already exists!
+https://github.com/KaleidoscopeMods/KaleidoscopeCookery/issues/215
