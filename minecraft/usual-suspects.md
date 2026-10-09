@@ -7,6 +7,8 @@ Also [superpowers04's Recommendations On What To Avoid](https://github.com/super
 
 # Problems where the logs don't immediately point out the problem
 - Game freezes when you open the creative inventory: libjf 3.17.4 has this issue. If you have that version of libjf, install 3.17.5 or newer from [modrinth](https://modrinth.com/mod/libjf/versions?g=1.21.1).
+- hs_err_pid with `guarantee(Thread::current()->is_VM_thread() || FreeList_lock->owned_by_self()) failed: master free list MT safety protocol at a safepoint`.  
+  This is known to be caused by spark, disabling it or using a different garbage collector can help.
 
 # Problems happening so often they deserver a mention here
 - iris 1.8.12 is incompatible with new sodium versions. Use 1.8.14 instead. You might need to click something to show beta versions.
