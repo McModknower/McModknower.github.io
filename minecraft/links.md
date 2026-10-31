@@ -9,6 +9,7 @@ Modded Minecraft Link Collection
 
 ## Examples
 - [tlom-1.21.1.zip](tlom-1.21.1.zip): An example datapack with a pack.mcmeta and an .mcfunction file running every tick.
+- [enivonmantal\_stripped\_pine\_tags\_1.20.1.zip](enivonmantal_stripped_pine_tags_1.20.1.zip): An example datapack with some item tags.
 
 ## Performance Mods
 There are some lists out there:
