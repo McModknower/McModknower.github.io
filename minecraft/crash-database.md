@@ -343,3 +343,35 @@ Minecraft failed while shutting down, and you probably got no crash report or st
 
 ### `java.lang.IllegalStateException: Feature order cycle found, involved sources:`
 Install https://modrinth.com/mod/feature-recycler or remove one of the mods mentioned in the exception message.
+### `java.lang.StackOverflowError`
+
+A stack overflow is when one function (piece of code) calls a function which calls a function which ...
+until the reserved space that keeps track of which function is currently calling which function (the stack) ran out of space (overflowed).
+This is most often caused by some function calling itself (indirectly) without some way of breaking out of the loop,
+but can also be caused by data structured in a way that the function(s) processing it run into this limit.
+
+To find out which mod(s) are involved, read the repeating part of the stack trace.
+
+There is one trigger I know of that is a bug in Minecraft itself, which involves `net.minecraft.util.DependencySorter.isCyclic`.
+<details>
+<summary>
+Expand here to see the start of such a stacktrace involving the DependencySorter.
+</summary>
+```
+java.lang.StackOverflowError: mouseClicked event handler
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.isCyclic(DependencySorter.java:40) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.lambda$isCyclic$1(DependencySorter.java:44) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
+	at java.base/java.util.stream.MatchOps$1MatchSink.accept(MatchOps.java:90) ~[?:?] {}
+	at java.base/java.util.HashMap$KeySpliterator.tryAdvance(HashMap.java:1736) ~[?:?] {}
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:129) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:527) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?] {}
+	at java.base/java.util.stream.MatchOps$MatchOp.evaluateSequential(MatchOps.java:230) ~[?:?] {}
+	at java.base/java.util.stream.MatchOps$MatchOp.evaluateSequential(MatchOps.java:196) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?] {}
+	at java.base/java.util.stream.ReferencePipeline.anyMatch(ReferencePipeline.java:632) ~[?:?] {}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.isCyclic(DependencySorter.java:44) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.lambda$isCyclic$1(DependencySorter.java:44) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
+```
+</details>
