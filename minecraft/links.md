@@ -23,6 +23,7 @@ There are some lists out there:
 - https://spark.lucko.me General performance measuring mod, good web viewer, great start if you have a problem
 - https://observable.tas.sh Profile (Block) Entities, aggregate by type or chunk. Good for finding entities or places with entity buildups.
 - https://misode.github.io/report Website for viewing vanilla profiling reports. Good if you are looking which datapack is causing lags via commands, as Spark does not show this info.
+- [Modernfix](https://modrinth.com/mod/modernfix) can profile game launches when spark is also installed, see https://github.com/embeddedt/ModernFix/wiki/Profiling-game-launches on how to enable this feature.
 
 ## Bug Fixing Mods
 There are a bunch of (general) bugfixing mods listed on <https://superstormer.github.io/useful-mods/>, you just have to change "Performance" to "Bug Fix" in the field at the top.
