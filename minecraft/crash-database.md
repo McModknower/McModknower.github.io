@@ -357,7 +357,7 @@ There is one trigger I know of that is a bug in Minecraft itself, which involves
 <summary>
 Expand here to see the start of such a stacktrace involving the DependencySorter.
 </summary>
-<code>
+<pre><code>
 java.lang.StackOverflowError: mouseClicked event handler
 	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.isCyclic(DependencySorter.java:40) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
 	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.lambda$isCyclic$1(DependencySorter.java:44) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
@@ -373,5 +373,5 @@ java.lang.StackOverflowError: mouseClicked event handler
 	at java.base/java.util.stream.ReferencePipeline.anyMatch(ReferencePipeline.java:632) ~[?:?] {}
 	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.isCyclic(DependencySorter.java:44) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
 	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.DependencySorter.lambda$isCyclic$1(DependencySorter.java:44) ~[client-1.21.1-20240808.144430-srg.jar%23318!/:?] {re:classloading}
-</code>
+</code></pre>
 </details>
