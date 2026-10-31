@@ -36,6 +36,7 @@ Here are mods made to fix specific bugs, which you should only install when you 
   including `java.lang.IllegalStateException: Item: galosphere:silver_ingot does not exist`
 - [Feature Recycler](https://modrinth.com/mod/feature-recycler)
   fixes `java.lang.IllegalStateException: Feature order cycle found, involved sources:` for 1.20.1 and 1.21.1.
+- [Cyanide](https://modrinth.com/mod/cyanide) improves the error messages for errors in the world generation part of datapacks.
 
 ## Discord Invite Links
 - Modded Minecraft Discord: https://discord.gg/moddedmc  
