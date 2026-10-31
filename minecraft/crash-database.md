@@ -267,6 +267,13 @@ In cases like these, you remove one of the mods.
 
 > org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @At("INVOKE") on net/minecraft/world/item/BowItem::**netherexp**$modifyArrowVelocity with priority 1000 cannot inject into net/minecraft/world/item/BowItem::m\_5551\_(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)V **merged by net.igneo.icv**.mixin.BowItemMixin with priority 999999999 [PREINJECT Applicator Phase -> **mixins.netherexp**.json:item.BowItemMixin **from mod netherexp** -> Prepare Injections ->  -> wrapOperation$zbg000$**netherexp**$modifyArrowVelocity(Lnet/minecraft/world/entity/projectile/AbstractArrow;Lnet/minecraft/world/entity/Entity;FFFFFLcom/llamalad7/mixinextras/injector/wrapoperation/Operation;)V -> Prepare]
 
+
+#### `Caused by: org.spongepowered.asm.mixin.transformer.throwables.InvalidMixinException: ... was not located in the target class`
+
+This error message indicates that one mod wanted to change/use something from another mod that simply doesn't exist in the other mod. This is normally caused by the thing being removed from the other mod in some update. Here is an example where certain\_questing\_additions tries to use something from ftbquests that isn't in that ftbquests version:
+
+> Caused by: org.spongepowered.asm.mixin.transformer.throwables.InvalidMixinException: @Shadow method renderConnection in certain\_questing\_additions.mixins.json:QuestPanelMixin **from mod certain_questing_additions** was not located in the target class dev.ftb.mods.**ftbquests**.client.gui.quests.QuestPanel. Using refmap certain-questing-additions.refmap.json
+
 ## RAM problems
 
 ### `java.lang.OutOfMemoryError: Java heap space`
